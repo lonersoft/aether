@@ -10,7 +10,7 @@
     "description": "\ud83d\ude80 a multiegg that's free and open-source",
     "features": null,
     "docker_images": {
-        "aether Latest": "ghcr.io\/lonersoft\/aether:main"
+        "aether Latest": "ghcr.io\/amogusreal69\/aether:main"
     },
     "file_denylist": [],
     "startup": ".\/entrypoint.sh",
