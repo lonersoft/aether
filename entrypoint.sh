@@ -15,7 +15,7 @@ function display {
     echo -e "\e[38;2;195;144;230m  Server Port: \e[38;5;250m$SERVER_PORT\e[0m"
     echo -e "\e[1;36m \e[0m"
     echo -e "\e[1;36m \e[0m"
-    toilet -f "DOS Rebel" --filter border:gay "$HOSTING_NAME" -w 200
+    toilet -f "DOS Rebel" --filter gay "$HOSTING_NAME" -w 200
     echo -e "\e[1;36m \e[0m"
     if [ -n "$DISCORD_LINK" ] || [ -n "$EMAIL" ]; then
         if [ -n "$DISCORD_LINK" ]; then
@@ -355,7 +355,9 @@ function install_bedrock {
     cp -rf permissions.json.bak permissions.json 2>/dev/null
     cp -rf allowlist.json.bak allowlist.json 2>/dev/null
     sed -i "s|^server-port=.*|server-port=$SERVER_PORT|g" server.properties
-    sed -i "s|^server-name=.*|server-name=Join $HOSTING_NAME For Free Server discord.gg/$DISCORD_LINK|g" server.properties
+    if [[ -n "$HOSTING_NAME" && -n "$DISCORD_LINK" && "$ENABLE_FORCED_MOTD" == "1" ]]; then
+        forced_motd_bedrock
+    fi
     rm -rf *.bak *.txt
     chmod +x bedrock_server
     bin_bytes=$(stat -c%s bedrock_server 2>/dev/null || stat -f%z bedrock_server 2>/dev/null)
@@ -474,8 +476,6 @@ function bedrock_menu {
             install_bedrock
             ;;
         2)
-#             echo -e "Defaulting to PM4 Latest..."
-#             pmmp="PM5"
             prompt_eula_mc
             install_pmmp
             ;;
