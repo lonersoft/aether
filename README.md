@@ -5,7 +5,7 @@ A simple multiegg that's highly configurable (in my opinion), ~~that's paid~~ al
 aether is a multiegg designed to simply server management for hosting providers. Currently, it only supports Minecraft, but more may come soon.
 
 > [!WARNING]  
-> aether is still in it's early stages! right now, the Minecraft Proxies option is not assigned to anything, so it doesn't work anymore, and there may be more bugs that I didn't catch! if any bugs occur, please report it via [GitHub Issues](https://github.com/amogusreal69/aether/issues/new), thanks! :3
+> aether is still in it's early stages! right now, the Minecraft Proxies option is not assigned to anything, so it doesn't work anymore, and there may be more bugs that I didn't catch! if any bugs occur, please report it via [GitHub Issues](https://github.com/lonersoft/aether/issues/new), thanks! :3
 
 ## Features
 there's not alot of impressive features, but some of them might be useful such as:
@@ -13,10 +13,10 @@ there's not alot of impressive features, but some of them might be useful such a
 * set MCJars API Key: track some stats like the total requests, and even block some server software from there!
 * forced MOTD: put your hosting name on their server's MOTD! this does not block plugins that interact with the MOTD such as [MiniMOTD](https://modrinth.com/plugin/minimotd) or [AdvancedServerList](https://modrinth.com/plugin/advancedserverlist)
 
-any ideas you may wanna see? [create an issue!](https://github.com/amogusreal69/aether/issues/new)
+any ideas you may wanna see? [create an issue!](https://github.com/lonersoft/aether/issues/new)
 
 ## Installation
-1. get the egg [here](https://github.com/amogusreal69/aether/blob/main/egg-aether.json) and download the json file
+1. get the egg [here](https://github.com/lonersoft/aether/blob/main/egg-aether.json) and download the json file
 2. navigate to yourpanelurl.com/admin/nests and create a new nest (optional)
 3. upload the json file to your newly created nest, or use a existing nest
 4. check the startup tab! there might be features you may want enabled, such as the forced MOTD
@@ -27,17 +27,17 @@ any ideas you may wanna see? [create an issue!](https://github.com/amogusreal69/
 need to test aether without having to manually add the egg? there is a directory named [`📂 /testing`](/testing) for testing the egg on a Ubuntu environment. check it out i guess?
 
 ## Contributors
-wanna contribute? thanks! to start contributing, you have to [fork this repo](https://github.com/amogusreal69/aether/fork) and then [open a PR](https://github.com/amogusreal69/aether/compare).
+wanna contribute? thanks! to start contributing, you have to [fork this repo](https://github.com/lonersoft/aether/fork) and then [open a PR](https://github.com/lonersoft/aether/compare).
 
-<a href="https://github.com/amogusreal69/aether/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=amogusreal69/aether" />
+<a href="https://github.com/lonersoft/aether/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=lonersoft/aether" />
 </a>
 
 ## Stargazers
-<a href="https://github.com/amogusreal69/aether/stargazers/">
+<a href="https://github.com/lonersoft/aether/stargazers/">
   <picture>
-    <source media="(prefers-color-scheme: light)" srcset="http://reporoster.com/stars/amogusreal69/aether">
-    <img alt="stargazer-widget" src="http://reporoster.com/stars/dark/amogusreal69/aether">
+    <source media="(prefers-color-scheme: light)" srcset="http://reporoster.com/stars/lonersoft/aether">
+    <img alt="stargazer-widget" src="http://reporoster.com/stars/dark/lonersoft/aether">
   </picture>
 </a>
 
@@ -59,4 +59,4 @@ Primectyl (closed src): provided some bases of how software install works, basic
 and some that i forgot! my bad :(
 
 ## Licensing
-aether is licensed under the [MIT license](https://github.com/amogusreal69/aether/blob/main/LICENSE)
+aether is licensed under the [MIT license](https://github.com/lonersoft/aether/blob/main/LICENSE)

@@ -18,7 +18,7 @@ apt install -y curl zip unzip jq coreutils toilet wget software-properties-commo
 ```bash
 mkdir -p aether
 cd aether
-wget -O script.sh https://aether.byteprint.dev/testing/script.sh
+wget -O script.sh https://aether.loners.software/testing/script.sh
 ```
 4. modify the script with YOUR settings! there are 15 environment variables, where:
 * 3 of them are variables set by Pterodactyl

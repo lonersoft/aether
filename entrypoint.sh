@@ -258,7 +258,7 @@ function optimize_server {
         return
     fi
     echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mOptimizing server...\e[0m"
-    curl -o $HOME/plugins/Hibernate.jar https://aether.byteprint.dev/files/Hibernate-2.1.0.jar
+    curl -o $HOME/plugins/Hibernate.jar https://aether.loners.software/files/Hibernate-2.1.0.jar
 }
 
 function install_vanilla {

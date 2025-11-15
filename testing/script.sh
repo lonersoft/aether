@@ -53,7 +53,7 @@ if [ "$SCRIPT_SOURCE" == "local" ]; then
     exit 0
 fi
 echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mDownloading entrypoint.sh to current directory, this may depend on your internet connection\e[0m"
-wget -O entrypoint.sh https://raw.githubusercontent.com/amogusreal69/aether/refs/heads/main/entrypoint.sh
+wget -O entrypoint.sh https://raw.githubusercontent.com/lonersoft/aether/refs/heads/main/entrypoint.sh
 echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mSetting entrypoint.sh as executable...\e[0m"
 chmod +x entrypoint.sh
 echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mExecuting entrypoint.sh, check if any errors popped up, will automatically start in 5 seconds\e[0m"
