@@ -31,8 +31,8 @@ aether is free and open-source software. To host this egg, alot of resources and
 need to test aether? there is a directory named [`📂 /testing`](/testing) for testing the egg on a Ubuntu environment. check it out i guess?
 
 ## 🖥️ Hostings that use aether
-| Hostings | About | Custom banner? | Notes |
-|---|---|---|---|
+| Hostings                                    | About                                                                                                                                        | Custom banner? | Notes    |
+|---------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|-----|---------------------|
 | [**OrynCloud**](https://www.oryncloud.com/) | Host your perfect game server with lightning-fast speeds, 99.9% uptime, and DDoS protection. The premier choice for serious gamers in India. | ✅ | Used in free hosting
 
 want your hosting listed here and/or have a custom banner? [email me!](mailto:hi@amogusreal.tech) it's free!
