@@ -24,7 +24,7 @@ any ideas you may wanna see? [create an issue!](https://github.com/amogusreal69/
 5. profit
 
 ## Testing
-need to test aether without having to manually add the egg? there is a directory named [`📂 /testing`](https://github.com/amogusreal69/aether/tree/main/testing) for testing the egg on a Ubuntu environment. check it out i guess?
+need to test aether without having to manually add the egg? there is a directory named [`📂 /testing`](/testing) for testing the egg on a Ubuntu environment. check it out i guess?
 
 ## Contributors
 wanna contribute? thanks! to start contributing, you have to [fork this repo](https://github.com/amogusreal69/aether/fork) and then [open a PR](https://github.com/amogusreal69/aether/compare).
