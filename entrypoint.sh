@@ -137,10 +137,12 @@ EOF
 }
 
 function forced_motd {
+    echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mUpdating MOTD, this feature may not work...\e[0m"
     sed -i "s|^motd=.*|motd=$(printf '%s' "Join $HOSTING_NAME for free server discord.gg/$DISCORD_LINK" | sed 's/[&/\]/\\&/g')|g" server.properties
 }
 
 function forced_motd_bedrock {
+    echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mUpdating MOTD, this feature may not work...\e[0m"
     sed -i 's|^server-name=.*|server-name="Join '"$HOSTING_NAME"' for free server discord.gg/'"$DISCORD_LINK"'"|g' server.properties
 }
 
@@ -328,15 +330,11 @@ function install_bedrock {
     # Minecraft CDN Akamai blocks script user-agents
     RANDVERSION=$(echo $((1 + $RANDOM % 4000)))
     if [ -z "${BEDROCK_VERSION}" ] || [ "${BEDROCK_VERSION}" == "latest" ]; then
-        echo -e "\e[1;31m[ERROR] \e[0;31mDue to recent changes of the Minecraft website, the automatic download of the latest Bedrock Server is currently unavailable.\e[0m"
-        echo -e "\e[1;31m[ERROR] \e[0;31mThere is a variable named BEDROCK_VERSION that you can set to a specific version. Please use that and run the script again. Thanks!\e[0m"
-        exit 1
-#        echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mDownloading latest Bedrock Server\e[0m"
-#        curl -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.$RANDVERSION.212 Safari/537.36" -H "Accept-Language: en" -H "Accept-Encoding: gzip, deflate" -o versions.html.gz https://www.minecraft.net/en-us/download/server/bedrock
-#        DOWNLOAD_URL=$(zgrep -o 'https://www.minecraft.net/bedrockdedicatedserver/bin-linux/[^"]*' versions.html.gz 2>/dev/null | head -1)
+        echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mDownloading latest Bedrock Server\e[0m"
+        DOWNLOAD_URL="https://mcjarfiles.com/api/get-latest-jar/bedrock/latest/linux"
     else
         echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mGrabbing URL of ${BEDROCK_VERSION} Bedrock Server\e[0m"
-        DOWNLOAD_URL="https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-$BEDROCK_VERSION.zip"
+        DOWNLOAD_URL="https://mcjarfiles.com/api/get-jar/bedrock/latest/linux/${BEDROCK_VERSION}"
     fi
     
     if [ -z "$DOWNLOAD_URL" ]; then
@@ -344,7 +342,7 @@ function install_bedrock {
         exit 1
     fi
     
-    DOWNLOAD_FILE=$(echo "$DOWNLOAD_URL" | rev | cut -d"/" -f1 | rev) # Retrieve archive name
+    DOWNLOAD_FILE=server.zip # Retrieve archive name
     rm -rf *.bak versions.html.gz
     echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mDownloading Vanilla Bedrock Server\e[0m"
     if ! curl -fSL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.$RANDVERSION.212 Safari/537.36" \
