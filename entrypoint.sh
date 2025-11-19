@@ -15,19 +15,41 @@ function display {
     echo -e "\e[38;2;195;144;230m  Server Port: \e[38;5;250m$SERVER_PORT\e[0m"
     echo -e "\e[1;36m \e[0m"
     echo -e "\e[1;36m \e[0m"
-    toilet -f "smblock" --filter gay "$HOSTING_NAME" -w toilet -f "smblock" "OrynCloud" -w 200 | sed "s/^/\x1b[38;5;93m/" | sed "s/$/\x1b[0m/".
+    if [ "$HOSTING_NAME" == "OrynCloud" ]; then
+        toilet -f "smblock" "OrynCloud" -w 200 | sed "s/^/\x1b[38;5;93m/" | sed "s/$/\x1b[0m/"
+        echo -e "\e[1;36m \e[0m"
+        echo -e "\033[38;5;93m🚀  Egg provided by aether, made by lonersoft"
+    else
+        toilet -f "smblock" --filter gay "$HOSTING_NAME" -w 200
+        echo -e "\e[1;36m \e[0m"
+        echo -e "\e[38;2;129;170;254m🚀  Egg provided by aether, made by lonersoft"
+    fi
+    echo -e "\e[1;36m \e[0m"
+    if [ -n "$DISCORD_LINK" ] || [ -n "$EMAIL" ]; then
+        if [ -n "$DISCORD_LINK" ]; then
+            echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mDiscord: https://discord.gg/$DISCORD_LINK\e[0m"
+        fi
+        if [ -n "$EMAIL" ]; then
+            echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mEmail: $EMAIL\e[0m"
+        fi
+        echo -e "\e[1;36m \e[0m"
+    fi
+}
+
+function create_config() {
+    local type="$1"
+    cat <<EOF >system/multiegg.yml
+# DO NOT MODIFY OR DELETE THIS FILE! This contains everything for the script to know what software are you using. Modifying or deleting this file may result of making your server unbootable. Period.
 software:
   type: $type
 EOF
 }
 
 function prompt_eula_mc {
-    loca l eula_file="eula.txt"
+    local eula_file="eula.txt"
     echo -e "\e[1;36m \e[0m"
     echo -e "\e[1;36m \e[0m"
-    echo -e "\e[36m📜  Before inst
-        echo -e "\e[1;36m \e[0m"
-        echo -e "\e[38;2;129;170;254m🚀  Egg provided by aether, made by lonersoft"alling, you must accept the Minecraft EULA.\e[0m"
+    echo -e "\e[36m📜  Before installing, you must accept the Minecraft EULA.\e[0m"
     echo -e "\e[32m○ Do you accept the Minecraft EULA?:\e[0m"
     echo -e "\e[32m○ Type 'y' to agree, or 'eula' to view the EULA. Anything else counts as a no.\e[0m"
     read -p "$(echo -e '\e[33mYour choice:\e[0m') " accept_eula_input
@@ -41,40 +63,6 @@ function prompt_eula_mc {
     else
         echo -e "\e[1;31m[ERROR] \e[0;31mYou have not agreed to the EULA. Exiting...\e[0m"
         exit 1
-    fi
-}
-
-check_aether_updates() {
-    if [ "$DISABLE_UPDATES" == "1" ]; then
-        return
-    fi
-
-    local github_api_url="https://api.github.com/repos/lonersoft/aether/releases/latest"
-    
-    echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mChecking for updates... this may take a while\e[0m"
-    
-    # Fetch latest release version from GitHub
-    local latest_version=$(curl -s --max-time 5 --connect-timeout 5 "$github_api_url" 2>/dev/null | grep -oP '"tag_name": "\K(.*)(?=")')
-    
-    if [ -z "$latest_version" ]; then
-        echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mUnable to check for updates (network issue).\e[0m"
-        return
-    fi
-
-    if [ -z "$AETHER_VERSION" ]; then
-        AETHER_VERSION=" unknown"
-    fi
-    
-    # Remove 'v' prefix if present for comparison
-    latest_version=${latest_version#v}
-    
-    if [ "$AETHER_VERSION" != "$latest_version" ]; then
-        echo -e "\e[33m⚠️  A new version of aether is available: v$latest_version (current: v$AETHER_VERSION)\e[0m"
-        echo -e "\e[33m   Download: https://github.com/lonersoft/aether/releases/latest\e[0m"
-        echo -e "\e[1;36m \e[0m"
-    else
-        echo -e "\e[32m✓ aether is up to date (v$AETHER_VERSION)\e[0m"
-        echo -e "\e[1;36m \e[0m"
     fi
 }
 
@@ -149,10 +137,12 @@ EOF
 }
 
 function forced_motd {
+    echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mUpdating MOTD, this feature may not work...\e[0m"
     sed -i "s|^motd=.*|motd=$(printf '%s' "Join $HOSTING_NAME for free server discord.gg/$DISCORD_LINK" | sed 's/[&/\]/\\&/g')|g" server.properties
 }
 
 function forced_motd_bedrock {
+    echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mUpdating MOTD, this feature may not work...\e[0m"
     sed -i 's|^server-name=.*|server-name="Join '"$HOSTING_NAME"' for free server discord.gg/'"$DISCORD_LINK"'"|g' server.properties
 }
 
@@ -249,7 +239,6 @@ function install_java {
     if [ -z "$JAVA_VERSION_S" ]; then
         clear
         display
-        check_aether_updates
         echo -e "\e[1;31m[ERROR] \e[0;31mOops! You met an error that occurred while installing Java $JAVA_VERSION.\e[0m"
         echo -e "\e[1;31m[ERROR] \e[0;31mPlease report this issue to the support team and share this error message:\e[0m"
         echo -e "\e[1;31m[ERROR] \e[0;31mThe JAVA_VERSION_S variable is empty, which cannot continue the Java Installation section.\e[0m"
@@ -279,7 +268,7 @@ function optimize_server {
         return
     fi
     echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mOptimizing server...\e[0m"
-    curl -o $HOME/plugins/Hibernate.jar https://aether.byteprint.dev/files/Hibernate-2.1.0.jar
+    curl -o $HOME/plugins/Hibernate.jar https://aether.loners.software/files/Hibernate-2.1.0.jar
 }
 
 function install_vanilla {
@@ -341,15 +330,11 @@ function install_bedrock {
     # Minecraft CDN Akamai blocks script user-agents
     RANDVERSION=$(echo $((1 + $RANDOM % 4000)))
     if [ -z "${BEDROCK_VERSION}" ] || [ "${BEDROCK_VERSION}" == "latest" ]; then
-        echo -e "\e[1;31m[ERROR] \e[0;31mDue to recent changes of the Minecraft website, the automatic download of the latest Bedrock Server is currently unavailable.\e[0m"
-        echo -e "\e[1;31m[ERROR] \e[0;31mThere is a variable named BEDROCK_VERSION that you can set to a specific version. Please use that and run the script again. Thanks!\e[0m"
-        exit 1
-#        echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mDownloading latest Bedrock Server\e[0m"
-#        curl -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.$RANDVERSION.212 Safari/537.36" -H "Accept-Language: en" -H "Accept-Encoding: gzip, deflate" -o versions.html.gz https://www.minecraft.net/en-us/download/server/bedrock
-#        DOWNLOAD_URL=$(zgrep -o 'https://www.minecraft.net/bedrockdedicatedserver/bin-linux/[^"]*' versions.html.gz 2>/dev/null | head -1)
+        echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mDownloading latest Bedrock Server\e[0m"
+        DOWNLOAD_URL="https://mcjarfiles.com/api/get-latest-jar/bedrock/latest/linux"
     else
         echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mGrabbing URL of ${BEDROCK_VERSION} Bedrock Server\e[0m"
-        DOWNLOAD_URL="https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-$BEDROCK_VERSION.zip"
+        DOWNLOAD_URL="https://mcjarfiles.com/api/get-jar/bedrock/latest/linux/${BEDROCK_VERSION}"
     fi
     
     if [ -z "$DOWNLOAD_URL" ]; then
@@ -357,7 +342,7 @@ function install_bedrock {
         exit 1
     fi
     
-    DOWNLOAD_FILE=$(echo "$DOWNLOAD_URL" | rev | cut -d"/" -f1 | rev) # Retrieve archive name
+    DOWNLOAD_FILE=server.zip # Retrieve archive name
     rm -rf *.bak versions.html.gz
     echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mDownloading Vanilla Bedrock Server\e[0m"
     if ! curl -fSL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.$RANDVERSION.212 Safari/537.36" \
@@ -519,21 +504,18 @@ function check_config {
             mc_bedrock_vanilla)
                 clear
                 display
-                check_aether_updates
                 launchBedrockVanillaServer
                 exit
                 ;;
             mc_java_vanilla)
                 clear
                 display
-                check_aether_updates
                 launchVanillaServer
                 exit
                 ;;
             mc_java | mc_java_paper | mc_java_purpur)
                 clear
                 display
-                check_aether_updates
                 case "$type" in
                 mc_java | mc_java_paper | mc_java_purpur)
                     launchJavaServer
@@ -544,14 +526,12 @@ function check_config {
             pmmp)
                 clear
                 display
-                check_aether_updates
                 launchPMMP
                 exit
                 ;;
             *)
                 clear
                 display
-                check_aether_updates
                 echo -e "\e[1;31m[ERROR] \e[0;31mInvalid system configuration type specified in system/multiegg.yml.\e[0m"
                 exit 1
                 ;;
@@ -559,7 +539,6 @@ function check_config {
         fi
         clear
         display
-        check_aether_updates
         echo -e "\e[1;31m[ERROR] \e[0;31mInvalid system configuration file.\e[0m"
         exit 1
     fi
@@ -573,7 +552,6 @@ function main {
     while true; do
         clear
         display
-        check_aether_updates
         mkdir -p system
         if [[ "$ENABLE_RULES" == "1" ]]; then
             rules
@@ -581,8 +559,8 @@ function main {
         echo -e "\e[36m🎮  Select the server type:\e[0m"
         echo -e "\e[32m1\e[0m) Minecraft: Java Edition\e[0m"
         echo -e "\e[32m2\e[0m) Minecraft: Bedrock Edition\e[0m"
-        echo -e "\e[32m4\e[0m) Minecraft Proxies\e[0m"
-        echo -e "\e[31m5\e[0m) Exit"
+        echo -e "\e[32m3\e[0m) Minecraft Proxies\e[0m"
+        echo -e "\e[31m4\e[0m) Exit"
         read -p "$(echo -e '\e[33mYour choice:\e[0m') " type
 
         case $type in
@@ -592,11 +570,11 @@ function main {
         2)
             bedrock_menu
             ;;
-        4)
+        3)
             echo -e "\e[1;31m[ERROR] \e[0;31mThis server type has currently not been implemented. Please try again later.\e[0m"
             exit 0
             ;;
-        5)
+        4)
             echo -e "\e[31m● Exiting the script. Goodbye!\e[0m"
             exit 0
             ;;
