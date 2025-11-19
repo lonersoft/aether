@@ -7,11 +7,11 @@ export SERVER_PORT="25565" # REQUIRED - Port the server will run on, will also s
 
 # Variables set by aether
 export HOSTING_NAME="aether" # REQUIRED - Name of the hosting, shows on the banner and forced MOTD (if enabled)
-export DISCORD_LINK="aaa" # Discord invite link, shows below the banner and forced MOTD (if enabled)
+export DISCORD_LINK="" # Discord invite link, shows below the banner and forced MOTD (if enabled)
 export EMAIL="" # Email address, shows below the banner
 export JAVA_VERSION="21" # REQUIRED - Java version to use, options: 25, 24, 23, 21, 17, 11, 8
 export STARTUP_ARGUMENT="" # Additional startup arguments for the server JVM
-export BEDROCK_VERSION="1.21.114.1" # REQUIRED - Bedrock server version to use for downloading, do not use latest as a version!
+export BEDROCK_VERSION="latest" # REQUIRED - Bedrock server version to use for downloading
 export ENABLE_FORCED_MOTD="0" # REQUIRED - Set to 1 to enable forced MOTD with hosting name and Discord Server, set to 0 to disable
 export OPTIMIZE_SERVER="0" # REQUIRED - Set to 1 to enable automatic server optimizations, set to 0 to disable
 export ENABLE_RULES="0" # REQUIRED - Set to 1 to enable server rules on first startup, set to 0 to disable
