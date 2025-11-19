@@ -207,6 +207,17 @@ function launchJavaServer {
     java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true $STARTUP_ARGUMENT -jar server.jar nogui
 }
 
+function launchProxyServer {
+    echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mChecking if Java is up to date...\e[0m"
+    install_java
+    if [[ -n "$HOSTING_NAME" && -n "$DISCORD_LINK" && "$ENABLE_FORCED_MOTD" == "1" ]]; then
+        echo -e '\e[38;2;255;165;0m[WARNING] \e[38;5;250mForced MOTD does not work with proxy servers.\e[0m'
+    fi
+    echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mRemember! You can change the server software you are using by deleting the \"system\" file in the File Manager and restarting the server.\e[0m"
+    echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mStarting Minecraft Proxy Server, this may take a while...\e[0m"
+    java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true $STARTUP_ARGUMENT -jar server.jar
+}
+
 function launchBedrockVanillaServer {
     echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mRemember! You can change the server software you are using by deleting the \"system\" file in the File Manager and restarting the server.\e[0m"
     echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mStarting Minecraft Bedrock Server, this may take a while...\e[0m"
@@ -357,6 +368,70 @@ function install_purpur {
     echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mServer jar downloaded successfully (Size: $jar_size)\e[0m"
     install_java
     launchJavaServer
+    exit
+}
+
+function install_bungeecord {
+    echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mDownloading BungeeCord Server...\e[0m"
+    if [ -n "$MCJARS_API_KEY" ]; then
+        jar_url=$(curl --silent --request GET --header "Authorization: $MCJARS_API_KEY" --url "https://versions.mcjars.app/api/v2/builds/BUNGEECORD/$bungeecord" | jq -r '.builds[0].jarUrl')
+    else
+        jar_url=$(curl --silent --request GET --url "https://versions.mcjars.app/api/v2/builds/BUNGEECORD/$bungeecord" | jq -r '.builds[0].jarUrl')
+    fi
+    curl -o server.jar "$jar_url"
+    create_config "mc_java_bungeecord"
+    cat <<EOF >config.yml
+listeners:
+  - query_port: $SERVER_PORT
+    host: 0.0.0.0:$SERVER_PORT
+EOF
+    jar_bytes=$(stat -c%s server.jar 2>/dev/null || stat -f%z server.jar 2>/dev/null)
+    jar_size=$(printf "%.2f MB" $((jar_bytes / 1000000)))
+    echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mServer jar downloaded successfully (Size: $jar_size)\e[0m"
+    install_java
+    launchProxyServer
+    exit
+}
+
+function install_velocity {
+    echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mDownloading Velocity Server...\e[0m"
+    if [ -n "$MCJARS_API_KEY" ]; then
+        jar_url=$(curl --silent --request GET --header "Authorization: $MCJARS_API_KEY" --url "https://versions.mcjars.app/api/v2/builds/VELOCITY/$velocity" | jq -r '.builds[0].jarUrl')
+    else
+        jar_url=$(curl --silent --request GET --url "https://versions.mcjars.app/api/v2/builds/VELOCITY/$velocity" | jq -r '.builds[0].jarUrl')
+    fi
+    curl -o server.jar "$jar_url"
+    create_config "mc_proxy_velocity"
+    echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mDownloading default Velocity config...\e[0m"
+    curl -o $HOME/velocity.toml https://aether.loners.software/files/velocity.toml
+    sed -i "s/serverport/$SERVER_PORT/g" "$HOME/velocity.toml"
+    jar_bytes=$(stat -c%s server.jar 2>/dev/null || stat -f%z server.jar 2>/dev/null)
+    jar_size=$(printf "%.2f MB" $((jar_bytes / 1000000)))
+    echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mServer jar downloaded successfully (Size: $jar_size)\e[0m"
+    install_java
+    launchProxyServer
+    exit
+}
+
+function install_waterfall {
+    echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mDownloading Waterfall Server...\e[0m"
+    if [ -n "$MCJARS_API_KEY" ]; then
+        jar_url=$(curl --silent --request GET --header "Authorization: $MCJARS_API_KEY" --url "https://versions.mcjars.app/api/v2/builds/WATERFALL/$waterfall" | jq -r '.builds[0].jarUrl')
+    else
+        jar_url=$(curl --silent --request GET --url "https://versions.mcjars.app/api/v2/builds/WATERFALL/$waterfall" | jq -r '.builds[0].jarUrl')
+    fi
+    curl -o server.jar "$jar_url"
+    create_config "mc_proxy_waterfall"
+    cat <<EOF >config.yml
+listeners:
+  - query_port: $SERVER_PORT
+    host: 0.0.0.0:$SERVER_PORT
+EOF
+    jar_bytes=$(stat -c%s server.jar 2>/dev/null || stat -f%z server.jar 2>/dev/null)
+    jar_size=$(printf "%.2f MB" $((jar_bytes / 1000000)))
+    echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mServer jar downloaded successfully (Size: $jar_size)\e[0m"
+    install_java
+    launchProxyServer
     exit
 }
 
@@ -530,12 +605,96 @@ function bedrock_menu {
     done
 }
 
+function proxy_menu {
+    while true; do
+        echo -e "\e[1;36m \e[0m"
+        echo -e "\e[1;36m \e[0m"
+        echo -e '\e[38;2;255;165;0m[WARNING] \e[38;5;250mThis feature is relatively new and may have some issues. Please report any issues to https://github.com/lonersoft/aether/issues.\e[0m'
+        echo -e "\e[36m🖥️  Select your Proxy server:\e[0m"
+        echo -e "\e[32m1\e[0m) Bungeecord\e[0m"
+        echo -e "\e[32m2\e[0m) Velocity\e[0m"
+        echo -e "\e[32m3\e[0m) Waterfall\e[0m"
+        echo -e "\e[31m4\e[0m) Back\e[0m"
+
+        read -p "$(echo -e '\e[33mYour choice:\e[0m') " proxy
+
+        case $proxy in
+        1)
+            echo -e "\e[1;36m \e[0m"
+            echo -e "\e[1;36m \e[0m"
+            echo -e '\e[38;2;255;165;0m[WARNING] \e[38;5;250mBungeeCord versions below 1.16 are not shown here due to them being old.\e[0m'
+            echo -e "\e[36m🔧  Select the Bungeecord version you want to use:\e[0m"
+            echo -e "\e[32m→ 1.16, 1.17, 1.18, 1.19, 1.20, 1.21\e[0m"
+            read -p "$(echo -e '\e[33mYour choice:\e[0m') " input_version
+            valid_versions="1.16 1.17 1.18 1.19 1.20 1.21"
+
+            # Check if the input version is in the list of valid versions
+            if [[ $valid_versions =~ (^|[[:space:]])$input_version($|[[:space:]]) ]]; then
+                bungeecord="$input_version"
+                prompt_eula_mc
+                install_bungeecord
+            else
+               echo -e "\e[1;31m[ERROR] \e[0;31mThe specified version is either invalid or deprecated.\e[0m"
+            fi
+            ;;
+        2)
+            echo -e "\e[1;36m \e[0m"
+            echo -e "\e[1;36m \e[0m"
+            echo -e "\e[36m🔧  Select the Velocity version you want to use:\e[0m"
+            echo -e "\e[32m→ 3.1.0, 3.1.1-SNAPSHOT, 3.1.1, 3.1.2-SNAPSHOT, 1.0.10, 1.1.9, 3.2.0-SNAPSHOT, 3.3.0-SNAPSHOT, 3.4.0-SNAPSHOT\e[0m"
+            read -p "$(echo -e '\e[33mYour choice:\e[0m') " input_version
+            valid_versions="3.1.0 3.1.1-SNAPSHOT 3.1.1 3.1.2-SNAPSHOT 1.0.10 1.1.9 3.2.0-SNAPSHOT 3.3.0-SNAPSHOT 3.4.0-SNAPSHOT"
+
+            # Check if the input version is in the list of valid versions
+            if [[ $valid_versions =~ (^|[[:space:]])$input_version($|[[:space:]]) ]]; then
+                velocity="$input_version"
+                prompt_eula_mc
+                install_velocity
+            else
+               echo -e "\e[1;31m[ERROR] \e[0;31mThe specified version is either invalid or deprecated.\e[0m"
+            fi
+            ;;
+        3)
+            echo -e "\e[1;36m \e[0m"
+            echo -e "\e[1;36m \e[0m"
+            echo -e '\e[38;2;255;165;0m[WARNING] \e[38;5;250mKeep in mind, Waterfall is deprecated and may not work as expected. Take backups!\e[0m'
+            echo -e "\e[36m🔧  Select the Waterfall version you want to use:\e[0m"
+            echo -e "\e[32m→ 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21\e[0m"
+            read -p "$(echo -e '\e[33mYour choice:\e[0m') " input_version
+            valid_versions="1.11 1.12 1.13 1.14 1.15 1.16 1.17 1.18 1.19 1.20 1.21"
+
+            # Check if the input version is in the list of valid versions
+            if [[ $valid_versions =~ (^|[[:space:]])$input_version($|[[:space:]]) ]]; then
+                waterfall="$input_version"
+                prompt_eula_mc
+                install_waterfall
+            else
+               echo -e "\e[1;31m[ERROR] \e[0;31mThe specified version is either invalid or deprecated.\e[0m"
+            fi
+            ;;
+        4)
+            break
+            ;;
+        *)
+            echo -e "\e[1;31m[ERROR] \e[0;31mInvalid choice. Please try again.\e[0m"
+            ;;
+        esac
+    done
+}
+
 function check_config {
     if [ -e "system/multiegg.yml" ]; then
         type=$(grep -A3 'type:' system/multiegg.yml | tail -n1 | awk '{ print $2}')
 
         if [ -n "$type" ]; then
             case "$type" in
+            mc_proxy_bungeecord | mc_proxy_velocity | mc_proxy_waterfall)
+                clear
+                display
+                check_aether_updates
+                launchProxyServer
+                exit
+                ;;
             mc_bedrock_vanilla)
                 clear
                 display
@@ -613,7 +772,7 @@ function main {
             bedrock_menu
             ;;
         3)
-            echo -e "\e[1;31m[ERROR] \e[0;31mThis server type has currently not been implemented. Please try again later.\e[0m"
+            proxy_menu
             exit 0
             ;;
         4)
