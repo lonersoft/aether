@@ -2,4 +2,5 @@
 this directory is where stuff is stored so that aether knows where to get them<br>
 this dir currently contains:\
 [`📄 Hibernate-2.1.0.jar`](https://files.aether.loners.software/files/Hibernate-2.1.0.jar) — contains the hibernation plugin\
-[`📄 velocity.toml`](https://files.aether.loners.software/files/velocity.toml) — contains default velocity config
+[`📄 velocity.toml`](https://files.aether.loners.software/files/velocity.toml) — contains default velocity config\
+[`📄 server.pmmp.properties`](https://files.aether.loners.software/files/server.pmmp.properties) — contains default pmmp config\

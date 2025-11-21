@@ -1,6 +1,6 @@
 #!/bin/bash
 # aether v1
-# A multiegg for hosting companies to host Minecraft servers.
+# A multiegg for hosting companies to host Minecraft servers. it's also not shit so you should use it
 # Licensed under the MIT License
 # Forked from Primectyl by divyamboii, licensed under the MIT License
 
@@ -58,7 +58,7 @@ function prompt_eula_mc {
         echo "eula=true" >"$eula_file"
         echo -e "\033[92m● You have agreed to the EULA. Starting installation...\e[0m"
     elif [[ "$accept_eula_input" == *eula* ]]; then
-        echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mThe EULA can be found at https://www.minecraft.net/en-us/eula.\e[0m"
+        echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mThe EULA can be found at https://www.minecraft.net/eula.\e[0m"
         prompt_eula_mc
     else
         echo -e "\e[1;31m[ERROR] \e[0;31mYou have not agreed to the EULA. Exiting...\e[0m"
@@ -145,31 +145,6 @@ query.port=$SERVER_PORT
 EOF
 }
 
-function config_pmmp {
-    # For PocketMineMP server
-    cat <<EOF >server.properties
-language=eng
-motd=$HOSTING_NAME PocketMine-MP Server
-server-port=$SERVER_PORT
-server-portv6=0
-max-players=20
-view-distance=20
-white-list=off
-enable-query=on
-enable-ipv6=off
-force-gamemode=off
-hardcore=off
-pvp=on
-difficulty=2
-generator-settings=
-level-name=world
-level-seed=
-level-type=default
-auto-save=on
-xbox-auth=on
-EOF
-}
-
 function forced_motd {
     echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mUpdating MOTD, this feature may not work...\e[0m"
     sed -i "s|^motd=.*|motd=$(printf '%s' "Join $HOSTING_NAME for free server discord.gg/$DISCORD_LINK" | sed 's/[&/\]/\\&/g')|g" server.properties
@@ -215,7 +190,7 @@ function launchProxyServer {
     fi
     echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mRemember! You can change the server software you are using by deleting the \"system\" file in the File Manager and restarting the server.\e[0m"
     echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mStarting Minecraft Proxy Server, this may take a while...\e[0m"
-    java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true $STARTUP_ARGUMENT -jar server.jar
+    java -Xms128M -XX:+UseG1GC -XX:G1HeapRegionSize=4M -XX:+UnlockExperimentalVMOptions -XX:+ParallelRefProcEnabled -XX:+AlwaysPreTouch -XX:MaxInlineLevel=15 $STARTUP_ARGUMENT -jar server.jar
 }
 
 function launchBedrockVanillaServer {
@@ -490,7 +465,13 @@ function install_pmmp {
     echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mRunning installation script from: get.pmmp.io\e[0m"
     curl -sL https://get.pmmp.io | bash -s -
     echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mSetting up server properties...\e[0m"
-    config_pmmp
+    echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mDownloading default PocketMineMP config...\e[0m"
+    curl -o $HOME/server.properties https://files.aether.loners.software/files/server.pmmp.properties
+    sed -i "s/HOSTING_NAME/$HOSTING_NAME/g" "$HOME/server.properties"
+    sed -i "s|^server-port=.*|server-port=$SERVER_PORT|g" "$HOME/server.properties"
+    if [[ -n "$HOSTING_NAME" && -n "$DISCORD_LINK" && "$ENABLE_FORCED_MOTD" == "1" ]]; then
+        forced_motd
+    fi
     create_config "pmmp"
     phar_bytes=$(stat -c%s PocketMine-MP.phar 2>/dev/null || stat -f%z PocketMine-MP.phar 2>/dev/null)
     phar_size=$(printf "%.2f MB" $((phar_bytes / 1000000)))
@@ -732,6 +713,7 @@ function check_config {
                 display
                 check_aether_updates
                 echo -e "\e[1;31m[ERROR] \e[0;31mInvalid system configuration type specified in system/multiegg.yml.\e[0m"
+                echo -e "\e[1;31m[ERROR] \e[0;31mPlease delete the system/multiegg.yml file and restart your server.\e[0m"
                 exit 1
                 ;;
             esac
@@ -740,6 +722,7 @@ function check_config {
         display
         check_aether_updates
         echo -e "\e[1;31m[ERROR] \e[0;31mInvalid system configuration file.\e[0m"
+        echo -e "\e[1;31m[ERROR] \e[0;31mPlease delete the system/multiegg.yml file and restart your server.\e[0m"
         exit 1
     fi
 }
