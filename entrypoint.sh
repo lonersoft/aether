@@ -346,6 +346,24 @@ function install_purpur {
     exit
 }
 
+function install_pufferfish {
+    echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mDownloading Pufferfish Server...\e[0m"
+    if [ -n "$MCJARS_API_KEY" ]; then
+        jar_url=$(curl --silent --request GET --header "Authorization: $MCJARS_API_KEY" --url "https://versions.mcjars.app/api/v2/builds/PUFFERFISH/$pufferfish" | jq -r '.builds[0].jarUrl')
+    else
+        jar_url=$(curl --silent --request GET --url "https://versions.mcjars.app/api/v2/builds/PUFFERFISH/$pufferfish" | jq -r '.builds[0].jarUrl')
+    fi
+    curl -o server.jar "$jar_url"
+    jar_bytes=$(stat -c%s server.jar 2>/dev/null || stat -f%z server.jar 2>/dev/null)
+    jar_size=$(printf "%.2f MB" $((jar_bytes / 1000000)))
+    create_config "mc_java_pufferfish"
+    port_assign
+    echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mServer jar downloaded successfully (Size: $jar_size)\e[0m"
+    install_java
+    launchJavaServer
+    exit
+}
+
 function install_bungeecord {
     echo -e "\e[38;2;129;170;254m[INFO] \e[38;5;250mDownloading BungeeCord Server...\e[0m"
     if [ -n "$MCJARS_API_KEY" ]; then
@@ -492,7 +510,8 @@ function minecraft_menu {
         echo -e "\e[32m1\e[0m) Vanilla  \e[38;5;250m(1.18 - 1.21.10)\e[0m"
         echo -e "\e[32m2\e[0m) Paper  \e[38;5;250m(1.8.8 - 1.21.10)\e[0m"
         echo -e "\e[32m3\e[0m) Purpur \e[38;5;250m(1.14.1 - 1.21.10)\e[0m"
-        echo -e "\e[31m4\e[0m) Back\e[0m"
+        echo -e "\e[32m4\e[0m) Pufferfish \e[38;5;250m(1.17.1 - 1.21.8)\e[0m"
+        echo -e "\e[31m5\e[0m) Back\e[0m"
 
         read -p "$(echo -e '\e[33mYour choice:\e[0m') " mcsoft
 
@@ -547,6 +566,21 @@ function minecraft_menu {
             fi
             ;;
         4)
+            echo -e "\e[1;36m \e[0m"
+            echo -e "\e[1;36m \e[0m"
+            echo -e "\e[36m🔧  Select the Pufferfish version you want to use:\e[0m"
+            echo -e "\e[32m→ 1.17.1, 1.18, 1.18.1, 1.18.2, 1.19, 1.19.1, 1.19.2, 1.19.3, 1.19.4, 1.20.1, 1.20.2, 1.20.4, 1.21, 1.21.1, 1.21.3, 1.21.7, 1.21.8\e[0m"
+            read -p "$(echo -e '\e[33mYour choice:\e[0m') " input_version
+            valid_versions="1.17.1 1.18 1.18.1 1.18.2 1.19 1.19.1 1.19.2 1.19.3 1.19.4 1.20.1 1.20.2 1.20.4 1.21 1.21.1 1.21.3 1.21.7 1.21.8"
+            if [[ $valid_versions =~ (^|[[:space:]])$input_version($|[[:space:]]) ]]; then
+                pufferfish="$input_version"
+                prompt_eula_mc
+                install_pufferfish
+            else
+                echo -e "\e[1;31m[ERROR] \e[0;31mThe specified version is either invalid or deprecated.\e[0m"
+            fi
+            ;;
+        5)
             break
             ;;
         *)
@@ -690,12 +724,12 @@ function check_config {
                 launchVanillaServer
                 exit
                 ;;
-            mc_java | mc_java_paper | mc_java_purpur)
+            mc_java | mc_java_paper | mc_java_purpur | mc_java_pufferfish)
                 clear
                 display
                 check_aether_updates
                 case "$type" in
-                mc_java | mc_java_paper | mc_java_purpur)
+                mc_java | mc_java_paper | mc_java_purpur | mc_java_pufferfish)
                     launchJavaServer
                     ;;
                 esac
