@@ -6,11 +6,11 @@
 
 ARCH=$([[ "$(uname -m)" == "x86_64" ]] && printf "amd64" || printf "arm64")
 
-# Ensure we are in the script's directory
-cd "$(dirname "$0")" || exit 1
+# Get script directory
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Source all functions
-for file in $(find functions -name "*.sh" -type f | sort); do
+for file in $(find "$SCRIPT_DIR/functions" -name "*.sh" -type f | sort); do
     source "$file"
 done
 
