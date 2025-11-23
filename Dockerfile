@@ -9,6 +9,7 @@ WORKDIR /home/container
 
 # Copy the entrypoint script to the container
 COPY ./entrypoint.sh /entrypoint.sh
+COPY ./functions /functions
 
 # Update and install required packages
 RUN apt update -y && \
