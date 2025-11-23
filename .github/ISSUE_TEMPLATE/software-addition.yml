@@ -1,0 +1,61 @@
+name: ➕ Server Software Request
+description: Request a server software to be added to aether.
+title: "[REQUEST] Server Software Name"
+assignees: 'amogusreal69'
+labels: ["request"]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for suggesting a new game/software! Please fill out as much information as possible."
+
+  - type: input
+    id: software-name
+    attributes:
+      label: Server Software Name
+      description: The official name of what you're requesting
+      placeholder: e.g., Minecraft, Pterodactyl Panel
+    validations:
+      required: true
+      
+  - type: input
+    id: wiki-link
+    attributes:
+      label: Server Software Wiki/Documentation Link
+      description: Official link to installation/setup documentation
+      placeholder: https://wiki.example.com/server-setup
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Minecraft Java
+        - Minecraft Bedrock
+        - Minecraft Proxy
+        - Game Server
+        - Other
+    validations:
+      required: true
+      
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Additional Information
+      description: Why this should be added, special requirements, community interest, etc.
+      placeholder: |
+        - Popularity metrics
+        - Special hardware requirements
+        - Relevant community links
+      render: markdown
+      
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Verification
+      options:
+        - label: I've verified this software is allowed to be hosted (check TOS/EULA)
+          required: true
+        - label: This software doesn't violate any laws or GitHub's ToS
+          required: true
