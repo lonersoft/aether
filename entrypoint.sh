@@ -43,7 +43,6 @@ function main {
             ;;
         3)
             proxy_menu
-            exit 0
             ;;
         4)
             echo -e "\e[31m● Exiting the script. Goodbye!\e[0m"
