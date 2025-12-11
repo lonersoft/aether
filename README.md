@@ -1,11 +1,11 @@
+> [!WARNING]  
+> i currently have found no bugs and is pretty much stable software, so this project will go on maintenance mode, maybe a rewrite would happen soon? i don't know... if any bugs occur, please report it via [`➚ GitHub Issues`](https://github.com/lonersoft/aether/issues/new), thanks! :3
+
 # 🥚 aether [![wakatime](https://wakatime.com/badge/github/lonersoft/aether.svg)](https://wakatime.com/badge/github/lonersoft/aether) [![Create and publish the egg on ghcr.io](https://github.com/lonersoft/aether/actions/workflows/docker-publish.yml/badge.svg?branch=main)](https://github.com/lonersoft/aether/actions/workflows/docker-publish.yml)
 
 A simple multiegg that's highly configurable (in my opinion), ~~that's paid~~ all for free and open source!
 
 aether is a multiegg designed to simply server management for hosting providers. Currently, it only supports Minecraft, but more may come soon.
-
-> [!WARNING]  
-> while aether is in a stable state, it is still beta software! if any bugs occur, please report it via [`➚ GitHub Issues`](https://github.com/lonersoft/aether/issues/new), thanks! :3
 
 ## 🧩 Features
 there's not alot of impressive features, but some of them might be useful such as:
