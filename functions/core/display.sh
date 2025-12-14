@@ -16,7 +16,7 @@ function display {
     fi
     echo -e "\e[1;36m \e[0m"
     printout info "wanna suggest a new server software? create an issue here:"
-    printout info "https://github.com/lonersoft/aether/issues/new?template=software-addition.yml"
+    printout info "https://link.loners.software/aether/software"
     echo -e "\e[1;36m \e[0m"
     if [ -n "$DISCORD_LINK" ] || [ -n "$EMAIL" ]; then
         if [ -n "$DISCORD_LINK" ]; then
