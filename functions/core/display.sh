@@ -1,4 +1,4 @@
-#!/bin/bash
+# display prints a formatted summary of hardware and server information, including architecture, CPU model, memory usage (GiB and percentage), location, server port, a stylized hosting banner, and optional Discord/email contact links.
 
 function display {
     echo -e "\e[38;2;195;144;230m\e[4mHardware Information\e[0m"

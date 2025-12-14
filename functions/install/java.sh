@@ -1,4 +1,4 @@
-#!/bin/bash
+# install_java initializes sdkman if needed, maps the `JAVA_VERSION` environment variable to a concrete SDK identifier, installs or replaces the matching Java distribution, and exports `JAVA_HOME` and updates `PATH`.
 
 function install_java {
     if [ -z "$JAVA_VERSION" ]; then
@@ -69,6 +69,7 @@ function install_java {
     export PATH="$JAVA_HOME/bin:$PATH"
 }
 
+# install_paper downloads the Paper server JAR (using MCJARS_API_KEY if set), creates the Paper server configuration, assigns a port, ensures Java is installed, and launches the server.
 function install_paper {
     : "${paper:?Error: missing required Minecraft version variable 'paper'}"
     printout info "Downloading Paper Server..."
@@ -100,6 +101,7 @@ function install_paper {
     exit
 }
 
+# install_pufferfish downloads the latest Pufferfish server JAR, creates the server configuration and assigns a port, ensures the requested Java version is installed, and launches the server.
 function install_pufferfish {
     : "${pufferfish:?Error: missing required Minecraft version variable 'pufferfish'}"
     printout info "Downloading Pufferfish Server..."
@@ -131,6 +133,7 @@ function install_pufferfish {
     exit
 }
 
+# install_purpur downloads a Purpur server JAR (using MCJARS_API_KEY if set), records its size, creates the `mc_java_purpur` configuration, assigns a port, ensures the required Java is installed, and launches the server.
 function install_purpur {
     : "${purpur:?Error: missing required Minecraft version variable 'purpur'}"
     printout info "Downloading Purpur Server..."
@@ -162,6 +165,8 @@ function install_purpur {
     exit
 }
 
+# install_vanilla downloads a Vanilla Minecraft server JAR, records its size, creates the "mc_java_vanilla" config and assigns a port, ensures Java is installed, and launches the server.
+# If MCJARS_API_KEY is set, the mcjars API is queried with that key for the latest build URL; otherwise the public API is used.
 function install_vanilla {
     : "${vanilla:?Error: missing required Minecraft version variable 'vanilla'}"
     printout info "Downloading Vanilla Server..."

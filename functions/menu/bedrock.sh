@@ -1,4 +1,5 @@
-#!/bin/bash
+# bedrock_menu displays an interactive menu to choose between installing a Vanilla Bedrock or PocketMineMP server or to go back.
+# It prompts the user until "Back" is selected; choosing option 1 or 2 will request EULA confirmation then invoke the corresponding installer.
 
 function bedrock_menu {
     while true; do

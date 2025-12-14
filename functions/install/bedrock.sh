@@ -1,4 +1,4 @@
-#!/bin/bash
+# install_bedrock installs the Vanilla Bedrock Server: determines the appropriate download URL (latest or specific version), downloads and unpacks the archive, restores and updates configuration (including server port), optionally applies a forced MOTD, creates the service configuration, and launches the server.
 
 function install_bedrock {
     printout info "Starting installation of Vanilla Bedrock Server..."
@@ -50,6 +50,7 @@ function install_bedrock {
 }
 
 
+# install_pmmp installs PocketMine-MP: runs the official installer, writes and customizes server.properties (replacing HOSTING_NAME and server-port), applies forced MOTD when enabled, creates the instance config, logs the PHAR size, and launches the server.
 function install_pmmp {
     printout info "Starting installation of PocketMineMP..."
     cd "$HOME" || { echo "Error: unable to change directory to \"$HOME\"" >&2; exit 1; }
