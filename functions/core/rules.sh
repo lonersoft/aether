@@ -41,8 +41,9 @@ function rules {
     # Confirmation
     echo -e "\e[36mBy continuing, you confirm that you understand and agree to follow these rules.\e[0m"
     echo -e "\e[1;36m \e[0m"
+    echo -e '\e[36m\e[1mDo you agree to these rules? \e[33m(y/n):\e[0m '
     
-    read -p "$(echo -e '\e[36m\e[1mDo you agree to these rules? \e[33m(y/n):\e[0m ') " accept_rules
+     read -p "$(echo -e '\e[33mYour choice:\e[0m') " accept_rules
     accept_rules=$(echo "$accept_rules" | tr '[:upper:]' '[:lower:]') # Convert to lowercase
     
     if [[ "$accept_rules" == *y* || "$accept_rules" == *yes* ]]; then
