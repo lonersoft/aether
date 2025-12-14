@@ -7,7 +7,11 @@ function install_bungeecord {
     else
         jar_url=$(curl --silent --request GET --url "https://versions.mcjars.app/api/v2/builds/BUNGEECORD/$bungeecord" | jq -r '.builds[0].jarUrl')
     fi
-    curl -o server.jar "$jar_url"
+    curl -fSLo server.jar "$jar_url" || {
+        rm -f server.jar
+        printout error "Failed to download BungeeCord server jar from $jar_url"
+        exit 1
+    }
     create_config "mc_java_bungeecord"
     cat <<EOF >config.yml
 listeners:
@@ -30,10 +34,18 @@ function install_velocity {
     else
         jar_url=$(curl --silent --request GET --url "https://versions.mcjars.app/api/v2/builds/VELOCITY/$velocity" | jq -r '.builds[0].jarUrl')
     fi
-    curl -o server.jar "$jar_url"
+    curl -fSLo server.jar "$jar_url" || {
+        rm -f server.jar
+        printout error "Failed to download Velocity server jar from $jar_url"
+        exit 1
+    }
     create_config "mc_proxy_velocity"
     printout info "Downloading default Velocity config..."
-    curl -o $HOME/velocity.toml https://files.aether.loners.software/files/velocity.toml
+    curl -fSLo "$HOME/velocity.toml" https://files.aether.loners.software/files/velocity.toml || {
+        rm -f "$HOME/velocity.toml"
+        printout error "Failed to download Velocity config from https://files.aether.loners.software/files/velocity.toml"
+        exit 1
+    }
     sed -i "s/serverport/$SERVER_PORT/g" "$HOME/velocity.toml"
     jar_bytes=$(stat -c%s server.jar 2>/dev/null || stat -f%z server.jar 2>/dev/null)
     jar_size=$(printf "%.2f MB" $((jar_bytes / 1000000)))
@@ -51,7 +63,11 @@ function install_waterfall {
     else
         jar_url=$(curl --silent --request GET --url "https://versions.mcjars.app/api/v2/builds/WATERFALL/$waterfall" | jq -r '.builds[0].jarUrl')
     fi
-    curl -o server.jar "$jar_url"
+    curl -fSLo server.jar "$jar_url" || {
+        rm -f server.jar
+        printout error "Failed to download Waterfall server jar from $jar_url"
+        exit 1
+    }
     create_config "mc_proxy_waterfall"
     cat <<EOF >config.yml
 listeners:

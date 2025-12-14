@@ -45,17 +45,20 @@ function rules {
     read -p "$(echo -e '\e[33mYour choice:\e[0m') " accept_rules
     accept_rules=$(echo "$accept_rules" | tr '[:upper:]' '[:lower:]') # Convert to lowercase
     
-    if [[ "$accept_rules" == *y* || "$accept_rules" == *yes* ]]; then
-        mkdir -p "system"
-        cat > "$accept_rules_file" <<DUMMY
+    case "$accept_rules" in
+        y|yes)
+            mkdir -p "system"
+            cat > "$accept_rules_file" <<DUMMY
 This file is pretty useless. Date of acceptance: $(date '+%Y-%m-%d %H:%M:%S %Z')
 DUMMY
-        echo -e "\e[1;36m \e[0m"
-        printout success "Rules accepted! Starting installation..."
-        echo -e "\e[1;36m \e[0m"
-    else
-        echo -e "\e[1;36m \e[0m"
-        printout error "You must accept the rules to use this server! Exiting..."
-        exit 1
-    fi
+            echo -e "\e[1;36m \e[0m"
+            printout success "Rules accepted! Starting installation..."
+            echo -e "\e[1;36m \e[0m"
+            ;;
+        *)
+            echo -e "\e[1;36m \e[0m"
+            printout error "You must accept the rules to use this server! Exiting..."
+            exit 1
+            ;;
+    esac
 }
