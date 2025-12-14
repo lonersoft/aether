@@ -1,4 +1,6 @@
-#!/bin/bash
+# prompt_eula_mc prompts the user to accept the Minecraft EULA and records acceptance to eula.txt.
+# On input containing "y" or "yes" it writes "eula=true" to eula.txt and signals successful continuation.
+# If the user types a string containing "eula" it displays the EULA URL and re-prompts; on any other input it prints an error and exits with status 1.
 
 function prompt_eula_mc {
     local eula_file="eula.txt"

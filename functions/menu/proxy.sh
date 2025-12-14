@@ -1,4 +1,4 @@
-#!/bin/bash
+# proxy_menu displays an interactive proxy selection menu, validates the selected proxy version, prompts for EULA acceptance, and invokes the corresponding installer; choosing "4" returns to the previous menu.
 
 function proxy_menu {
     while true; do

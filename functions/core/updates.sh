@@ -1,4 +1,4 @@
-#!/bin/bash
+# check_aether_updates checks GitHub for the latest aether release and notifies (via printout/echo) when an update is available or when the current version is unknown.
 
 check_aether_updates() {
     if [ "$DISABLE_UPDATES" == "1" ]; then

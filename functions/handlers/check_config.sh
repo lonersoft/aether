@@ -1,4 +1,4 @@
-#!/bin/bash
+# check_config reads system/multiegg.yml for the configured system type and invokes the matching server launch routine or prints error messages and exits.
 
 function check_config {
     if [ -e "system/multiegg.yml" ]; then

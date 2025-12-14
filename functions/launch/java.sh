@@ -1,4 +1,4 @@
-#!/bin/bash
+# launchJavaServer prepares the environment (ensures Java is installed, runs optimizations and optional MOTD) and starts a Minecraft Java Edition server with tuned JVM options.
 
 function launchJavaServer {
     printout info "Checking if Java is up to date..."
@@ -12,6 +12,7 @@ function launchJavaServer {
     java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true $STARTUP_ARGUMENT -jar server.jar nogui
 }
 
+# launchVanillaServer prepares the environment (ensures Java is installed), optionally sets a forced MOTD when configured, reminds the user how to change server software, and starts a Minecraft Vanilla Java server with tuned JVM options.
 function launchVanillaServer {
     printout info "Checking if Java is up to date..."
     install_java
