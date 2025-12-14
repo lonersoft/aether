@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # install_bedrock installs the Vanilla Bedrock Server: determines the appropriate download URL (latest or specific version), downloads and unpacks the archive, restores and updates configuration (including server port), optionally applies a forced MOTD, creates the service configuration, and launches the server.
 
 function install_bedrock {
