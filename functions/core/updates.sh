@@ -18,7 +18,10 @@ check_aether_updates() {
     fi
 
     if [ -z "$AETHER_VERSION" ]; then
-        AETHER_VERSION=" unknown"
+        printout warning "Current Aether version is unknown. Cannot check for updates."
+        printout warning "If you are an administrator, please update the egg to get the latest features and fixes."
+        printout warning "Download it here: https://github.com/lonersoft/aether/releases/latest"
+        return
     fi
     
     # Remove 'v' prefix if present for comparison
