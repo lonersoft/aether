@@ -1,5 +1,4 @@
-> [!WARNING]  
-> i currently have found no bugs and is pretty much stable software, so this project will go on maintenance mode, maybe a rewrite would happen soon? i don't know... if any bugs occur, please report it via [`➚ GitHub Issues`](https://github.com/lonersoft/aether/issues/new), thanks! :3
+
 
 # 🥚 aether [![wakatime](https://wakatime.com/badge/github/lonersoft/aether.svg)](https://wakatime.com/badge/github/lonersoft/aether) [![Create and publish the egg on ghcr.io](https://github.com/lonersoft/aether/actions/workflows/docker-publish.yml/badge.svg?branch=main)](https://github.com/lonersoft/aether/actions/workflows/docker-publish.yml)
 
