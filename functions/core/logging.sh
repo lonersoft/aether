@@ -1,4 +1,4 @@
-#!/bin/bash
+# printout formats and echoes a message with a colored prefix determined by the first argument (`error`, `info`, `warning`, `success`, `solution`); if the type is unrecognized it echoes the message unmodified.
 
 function printout {
     local message="$2"

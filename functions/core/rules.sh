@@ -1,4 +1,4 @@
-#!/bin/bash
+# rules ensures the user accepts the server rules before continuing; if not accepted it displays the rules, prompts for confirmation, records acceptance to system/rulesagreed, and exits on denial.
 
 function rules {
     accept_rules_file="system/rulesagreed"

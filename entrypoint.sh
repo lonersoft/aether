@@ -16,7 +16,7 @@ done
 
 ####################################
 #          Main Script             #
-####################################
+# main presents the interactive server-type menu, performs initial checks and update routines, and dispatches user choices to the corresponding management submenus or exits.
 function main {
     check_config
     while true; do

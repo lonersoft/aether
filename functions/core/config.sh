@@ -1,4 +1,4 @@
-#!/bin/bash
+# create_config writes system/multiegg.yml containing a warning header, a generation timestamp, and a YAML `software.type` field set to the provided type.
 
 function create_config() {
     local type="$1"

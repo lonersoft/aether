@@ -1,4 +1,4 @@
-#!/bin/bash
+# install_bungeecord downloads and installs a BungeeCord proxy jar, writes a minimal config.yml using $SERVER_PORT, installs Java, and launches the proxy.
 
 function install_bungeecord {
     printout info "Downloading BungeeCord Server..."
@@ -22,6 +22,7 @@ EOF
     exit
 }
 
+# install_velocity downloads and sets up a Velocity proxy server: it fetches the latest Velocity jar (using MCJARS API when available), saves it as server.jar, creates the mc_proxy_velocity config, downloads and patches velocity.toml with SERVER_PORT, installs Java, launches the proxy, and exits.
 function install_velocity {
     printout info "Downloading Velocity Server..."
     if [ -n "$MCJARS_API_KEY" ]; then
@@ -42,6 +43,7 @@ function install_velocity {
     exit
 }
 
+# install_waterfall downloads and sets up a Waterfall proxy jar, writes a minimal config.yml using $SERVER_PORT, installs Java, launches the proxy server, and exits.
 function install_waterfall {
     printout info "Downloading Waterfall Server..."
     if [ -n "$MCJARS_API_KEY" ]; then

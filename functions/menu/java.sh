@@ -1,4 +1,4 @@
-#!/bin/bash
+# minecraft_menu displays an interactive colored menu to choose a Java Minecraft server variant and version, validates the selected version, prompts for the EULA, invokes the matching install routine (vanilla, paper, purpur, pufferfish), and exits when "Back" is chosen.
 
 function minecraft_menu {
     while true; do

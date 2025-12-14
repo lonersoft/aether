@@ -1,4 +1,4 @@
-#!/bin/bash
+# launchProxyServer launches and initializes a Minecraft proxy server: ensures Java is installed, warns if forced MOTD is enabled and incompatible, prints software-change guidance, and starts the Java process with predefined JVM options and the provided startup arguments to run server.jar.
 
 function launchProxyServer {
     printout info "Checking if Java is up to date..."
