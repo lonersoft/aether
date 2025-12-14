@@ -52,7 +52,7 @@ function install_bedrock {
 
 function install_pmmp {
     printout info "Starting installation of PocketMineMP..."
-    cd $HOME
+    cd "$HOME" || { echo "Error: unable to change directory to \"$HOME\"" >&2; exit 1; }
     printout info "Running installation script from: get.pmmp.io"
     curl -sL https://get.pmmp.io | bash -s -
     printout info "Setting up server properties..."

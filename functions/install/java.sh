@@ -70,73 +70,125 @@ function install_java {
 }
 
 function install_paper {
+    : "${paper:?Error: missing required Minecraft version variable 'paper'}"
     printout info "Downloading Paper Server..."
+    local jar_url
     if [ -n "$MCJARS_API_KEY" ]; then
-        jar_url=$(curl --silent --request GET --header "Authorization: $MCJARS_API_KEY" --url "https://versions.mcjars.app/api/v2/builds/PAPER/$paper" | jq -r '.builds[0].jarUrl')
+        jar_url=$(curl -fsL --request GET --header "Authorization: $MCJARS_API_KEY" --url "https://versions.mcjars.app/api/v2/builds/PAPER/$paper" | jq -r '.builds[0].jarUrl')
     else
-        jar_url=$(curl --silent --request GET --url "https://versions.mcjars.app/api/v2/builds/PAPER/$paper" | jq -r '.builds[0].jarUrl')
+        jar_url=$(curl -fsL --request GET --url "https://versions.mcjars.app/api/v2/builds/PAPER/$paper" | jq -r '.builds[0].jarUrl')
     fi
-    curl -o server.jar "$jar_url"
+    if [ -z "$jar_url" ] || [ "$jar_url" = "null" ]; then
+        printout error "Failed to resolve Paper jar URL for version '$paper'."
+        exit 1
+    fi
+    if ! curl -fsL -o server.jar "$jar_url"; then
+        printout error "Failed to download server.jar from $jar_url"
+        exit 1
+    fi
+    if [ ! -s server.jar ] || grep -q "<!DOCTYPE" server.jar 2>/dev/null; then
+        printout error "Downloaded server.jar appears invalid (empty or HTML)."
+        rm -f server.jar
+        exit 1
+    fi
     jar_bytes=$(stat -c%s server.jar 2>/dev/null || stat -f%z server.jar 2>/dev/null)
     jar_size=$(printf "%.2f MB" $((jar_bytes / 1000000)))
     create_config "mc_java_paper"
     port_assign
     printout info "Server jar downloaded successfully (Size: $jar_size)"
-    install_java
     launchJavaServer
     exit
 }
 
 function install_pufferfish {
+    : "${pufferfish:?Error: missing required Minecraft version variable 'pufferfish'}"
     printout info "Downloading Pufferfish Server..."
+    local jar_url
     if [ -n "$MCJARS_API_KEY" ]; then
-        jar_url=$(curl --silent --request GET --header "Authorization: $MCJARS_API_KEY" --url "https://versions.mcjars.app/api/v2/builds/PUFFERFISH/$pufferfish" | jq -r '.builds[0].jarUrl')
+        jar_url=$(curl -fsL --request GET --header "Authorization: $MCJARS_API_KEY" --url "https://versions.mcjars.app/api/v2/builds/PUFFERFISH/$pufferfish" | jq -r '.builds[0].jarUrl')
     else
-        jar_url=$(curl --silent --request GET --url "https://versions.mcjars.app/api/v2/builds/PUFFERFISH/$pufferfish" | jq -r '.builds[0].jarUrl')
+        jar_url=$(curl -fsL --request GET --url "https://versions.mcjars.app/api/v2/builds/PUFFERFISH/$pufferfish" | jq -r '.builds[0].jarUrl')
     fi
-    curl -o server.jar "$jar_url"
+    if [ -z "$jar_url" ] || [ "$jar_url" = "null" ]; then
+        printout error "Failed to resolve Pufferfish jar URL for version '$pufferfish'."
+        exit 1
+    fi
+    if ! curl -fsL -o server.jar "$jar_url"; then
+        printout error "Failed to download server.jar from $jar_url"
+        exit 1
+    fi
+    if [ ! -s server.jar ] || grep -q "<!DOCTYPE" server.jar 2>/dev/null; then
+        printout error "Downloaded server.jar appears invalid (empty or HTML)."
+        rm -f server.jar
+        exit 1
+    fi
     jar_bytes=$(stat -c%s server.jar 2>/dev/null || stat -f%z server.jar 2>/dev/null)
     jar_size=$(printf "%.2f MB" $((jar_bytes / 1000000)))
     create_config "mc_java_pufferfish"
     port_assign
     printout info "Server jar downloaded successfully (Size: $jar_size)"
-    install_java
     launchJavaServer
     exit
 }
 
 function install_purpur {
+    : "${purpur:?Error: missing required Minecraft version variable 'purpur'}"
     printout info "Downloading Purpur Server..."
+    local jar_url
     if [ -n "$MCJARS_API_KEY" ]; then
-        jar_url=$(curl --silent --request GET --header "Authorization: $MCJARS_API_KEY" --url "https://versions.mcjars.app/api/v2/builds/PURPUR/$purpur" | jq -r '.builds[0].jarUrl')
+        jar_url=$(curl -fsL --request GET --header "Authorization: $MCJARS_API_KEY" --url "https://versions.mcjars.app/api/v2/builds/PURPUR/$purpur" | jq -r '.builds[0].jarUrl')
     else
-        jar_url=$(curl --silent --request GET --url "https://versions.mcjars.app/api/v2/builds/PURPUR/$purpur" | jq -r '.builds[0].jarUrl')
+        jar_url=$(curl -fsL --request GET --url "https://versions.mcjars.app/api/v2/builds/PURPUR/$purpur" | jq -r '.builds[0].jarUrl')
     fi
-    curl -o server.jar "$jar_url"
+    if [ -z "$jar_url" ] || [ "$jar_url" = "null" ]; then
+        printout error "Failed to resolve Purpur jar URL for version '$purpur'."
+        exit 1
+    fi
+    if ! curl -fsL -o server.jar "$jar_url"; then
+        printout error "Failed to download server.jar from $jar_url"
+        exit 1
+    fi
+    if [ ! -s server.jar ] || grep -q "<!DOCTYPE" server.jar 2>/dev/null; then
+        printout error "Downloaded server.jar appears invalid (empty or HTML)."
+        rm -f server.jar
+        exit 1
+    fi
     jar_bytes=$(stat -c%s server.jar 2>/dev/null || stat -f%z server.jar 2>/dev/null)
     jar_size=$(printf "%.2f MB" $((jar_bytes / 1000000)))
     create_config "mc_java_purpur"
     port_assign
     printout info "Server jar downloaded successfully (Size: $jar_size)"
-    install_java
     launchJavaServer
     exit
 }
 
 function install_vanilla {
+    : "${vanilla:?Error: missing required Minecraft version variable 'vanilla'}"
     printout info "Downloading Vanilla Server..."
+    local jar_url
     if [ -n "$MCJARS_API_KEY" ]; then
-        jar_url=$(curl --silent --request GET --header "Authorization: $MCJARS_API_KEY" --url "https://versions.mcjars.app/api/v2/builds/VANILLA/$vanilla" | jq -r '.builds[0].jarUrl')
+        jar_url=$(curl -fsL --request GET --header "Authorization: $MCJARS_API_KEY" --url "https://versions.mcjars.app/api/v2/builds/VANILLA/$vanilla" | jq -r '.builds[0].jarUrl')
     else
-        jar_url=$(curl --silent --request GET --url "https://versions.mcjars.app/api/v2/builds/VANILLA/$vanilla" | jq -r '.builds[0].jarUrl')
+        jar_url=$(curl -fsL --request GET --url "https://versions.mcjars.app/api/v2/builds/VANILLA/$vanilla" | jq -r '.builds[0].jarUrl')
     fi
-    curl -o server.jar "$jar_url"
+    if [ -z "$jar_url" ] || [ "$jar_url" = "null" ]; then
+        printout error "Failed to resolve Vanilla jar URL for version '$vanilla'."
+        exit 1
+    fi
+    if ! curl -fsL -o server.jar "$jar_url"; then
+        printout error "Failed to download server.jar from $jar_url"
+        exit 1
+    fi
+    if [ ! -s server.jar ] || grep -q "<!DOCTYPE" server.jar 2>/dev/null; then
+        printout error "Downloaded server.jar appears invalid (empty or HTML)."
+        rm -f server.jar
+        exit 1
+    fi
     jar_bytes=$(stat -c%s server.jar 2>/dev/null || stat -f%z server.jar 2>/dev/null)
     jar_size=$(printf "%.2f MB" $((jar_bytes / 1000000)))
     create_config "mc_java_vanilla"
     port_assign
     printout info "Server jar downloaded successfully (Size: $jar_size)"
-    install_java
     launchVanillaServer
     exit
 }

@@ -9,10 +9,28 @@ check_aether_updates() {
     
     printout info "Checking for updates... this may take a while"
     
-    # Fetch latest release version from GitHub using jq
-    local latest_version=$(curl -s --max-time 5 --connect-timeout 5 "$github_api_url" 2>/dev/null | jq -r '.tag_name' 2>/dev/null)
-    
-    if [ -z "$latest_version" ] || [ "$latest_version" == "null" ]; then
+    # Ensure jq is available
+    if ! command -v jq >/dev/null 2>&1; then
+        printout info "Unable to check for updates (network issue)."
+        return
+    fi
+
+    # Fetch latest release JSON from GitHub
+    local latest_json
+    latest_json=$(curl -s --max-time 5 --connect-timeout 5 "$github_api_url" 2>/dev/null)
+
+    # Validate curl result
+    if [ $? -ne 0 ] || [ -z "$latest_json" ]; then
+        printout info "Unable to check for updates (network issue)."
+        return
+    fi
+
+    # Parse latest version using jq
+    local latest_version
+    latest_version=$(echo "$latest_json" | jq -r '.tag_name' 2>/dev/null)
+
+    # Validate jq parsing result
+    if [ $? -ne 0 ] || [ -z "$latest_version" ] || [ "$latest_version" = "null" ]; then
         printout info "Unable to check for updates (network issue)."
         return
     fi
