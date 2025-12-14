@@ -29,6 +29,7 @@ aether is free and open-source software. To host this egg, a lot of resources an
 5. profit
 
 ## 🖥️ Hosting's that use aether
+
 | Hosting's                                    | About                                                                                                                                        | Custom banner? | Notes    |
 |---------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|-----|---------------------|
 | [**OrynCloud**](https://www.oryncloud.com/) | Host your perfect game server with lightning-fast speeds, 99.9% uptime, and DDoS protection. The premier choice for serious gamers in India. | ✅ | Used in free hosting
