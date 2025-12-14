@@ -9,11 +9,11 @@ function install_java {
         exit 1
     fi
     if [ ! -d "$HOME/.sdkman" ]; then
-        curl -s "https://get.sdkman.io" | bash
+        curl -s "https://get.sdkman.io" | bash >/dev/null 2>&1
     fi
     source "$HOME/.sdkman/bin/sdkman-init.sh"
     sdk update >/dev/null 2>&1
-    sdk selfupdate
+    sdk selfupdate >/dev/null 2>&1
     case "$JAVA_VERSION" in
     8)
         JAVA_VERSION_S="8.0.472-tem"
@@ -54,7 +54,7 @@ function install_java {
         exit 1
     fi
     if sdk current java | grep -q "$JAVA_VERSION"; then
-    printout info "Java $JAVA_VERSION is already installed."
+        printout info "Java $JAVA_VERSION is already installed."
     else
         printout info "Installing Java $JAVA_VERSION_S..."
         if [ -n "$(sdk current java)" ]; then
