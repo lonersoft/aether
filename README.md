@@ -17,7 +17,7 @@ there's not alot of impressive features, but some of them might be useful such a
 any ideas you may wanna see? [`➚ create an issue!`](https://github.com/lonersoft/aether/issues/new)
 
 ## 💖 Donate
-aether is free and open-source software. To host this egg, alot of resources and money (and most importantly, time!) is used to run the servers. To keep our motivation going and keep everything up and running, we rely heavily on [`➚ donations`](https://hcb.hackclub.com/lonersoft/donations). We're also nonprofit and transparent with our finances! 
+aether is free and open-source software. To host this egg, a lot of resources and money (and most importantly, time!) is used to run the servers. To keep our motivation going and keep everything up and running, we rely heavily on [`➚ donations`](https://hcb.hackclub.com/lonersoft/donations). We're also nonprofit and transparent with our finances! 
 
 [➚ **Donate to our nonprofit organization**](https://hcb.hackclub.com/donations/start/lonersoft) or [`➚ view our open finances`](https://hcb.hackclub.com/lonersoft).
 
@@ -55,10 +55,10 @@ wanna contribute? thanks! to start contributing, you have to [`➚ fork this rep
 right now, this is what i'm planning to do:
 
 - [ ] 💾 decrease docker image size (current is ~250mb)
-- [ ] 🤖 maybe setup bot languages? might take alot of space tho
+- [ ] 🤖 maybe setup bot languages? might take a lot of space tho
 - [x] ❓ organize the functions of the egg, current egg is kinda hard to understand in my opinion
 - [ ] ⌨️ don't make the startup tab filled with admin only variables, maybe like a .json file that people can host themselves?
-- [ ] 🔒 lock server softwares that hostings may not need
+- [ ] 🔒 lock server softwares that hosting's may not need
 - [ ] ➕ enable ability to change rules
 
 ## 💖 Credits
