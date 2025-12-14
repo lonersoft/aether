@@ -21,6 +21,7 @@ check_aether_updates() {
         printout warning "Current Aether version is unknown. Cannot check for updates."
         printout warning "If you are an administrator, please update the egg to get the latest features and fixes."
         printout warning "Download it here: https://github.com/lonersoft/aether/releases/latest"
+        echo -e "\e[1;36m \e[0m"
         return
     fi
     

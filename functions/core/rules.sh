@@ -9,30 +9,51 @@ function rules {
         return
     fi
 
-    echo -e "\e[38;2;195;144;230m👋  Welcome to the setup wizard! This wizard will help you setup your Minecraft Server.\e[0m"
-    echo -e "\e[36m○ Before continuing, you must agree to our server rules.\e[0m"
-    echo -e "\e[32mThese rules help maintain a fair, secure, and high-performance environment for all users.\e[0m"
+    # Header
     echo -e "\e[1;36m \e[0m"
-    echo -e "\e[32m1) \e[0m Chunk-altering plugins are strictly prohibited."
-    echo -e "\e[32m2) \e[0m Mining or any resource-intensive activities that degrade performance are not allowed."
-    echo -e "\e[32m3) \e[0m Use server resources responsibly – excessive CPU, RAM, or network usage is not permitted."
-    echo -e "\e[32m4) \e[0m Exploiting bugs, abusing services, or bypassing restrictions is strictly forbidden."
-    echo -e "\e[32m5) \e[0m All users must comply with our Terms of Service – violations may result in suspension."
+    echo -e "\e[38;2;195;144;230m\e[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[0m"
+    echo -e "\e[38;2;195;144;230m\e[1m  👋  WELCOME TO THE SETUP WIZARD\e[0m"
+    echo -e "\e[38;2;195;144;230m\e[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[0m"
     echo -e "\e[1;36m \e[0m"
-    echo -e "\e[31m⚠️  Breaking any of these rules may result in a suspension of our service or a ban.\e[0m"
+    echo -e "\e[38;5;250mThis wizard will help you setup your Minecraft Server.\e[0m"
     echo -e "\e[1;36m \e[0m"
+    
+    # Rules section
+    echo -e "\e[36m\e[1m📋  SERVER RULES\e[0m"
+    echo -e "\e[36mThese rules help maintain a fair, secure, and high-performance environment.\e[0m"
+    echo -e "\e[1;36m \e[0m"
+    echo -e "\e[38;5;250m  \e[32m① \e[38;5;250mChunk-altering plugins are strictly prohibited.\e[0m"
+    echo -e "\e[38;5;250m  \e[32m② \e[38;5;250mMining or any resource-intensive activities that degrade\e[0m"
+    echo -e "\e[38;5;250m     performance are not allowed.\e[0m"
+    echo -e "\e[38;5;250m  \e[32m③ \e[38;5;250mUse server resources responsibly – excessive CPU, RAM, or\e[0m"
+    echo -e "\e[38;5;250m     network usage is not permitted.\e[0m"
+    echo -e "\e[38;5;250m  \e[32m④ \e[38;5;250mExploiting bugs, abusing services, or bypassing restrictions\e[0m"
+    echo -e "\e[38;5;250m     is strictly forbidden.\e[0m"
+    echo -e "\e[38;5;250m  \e[32m⑤ \e[38;5;250mAll users must comply with our Terms of Service – violations\e[0m"
+    echo -e "\e[38;5;250m     may result in suspension.\e[0m"
+    echo -e "\e[1;36m \e[0m"
+    
+    # Warning
+    echo -e "\e[1;31m⚠️  IMPORTANT\e[0m"
+    echo -e "\e[31mBreaking any of these rules may result in service suspension or a ban.\e[0m"
+    echo -e "\e[1;36m \e[0m"
+    
+    # Confirmation
     echo -e "\e[36mBy continuing, you confirm that you understand and agree to follow these rules.\e[0m"
     echo -e "\e[1;36m \e[0m"
-    echo -e "\e[33m○ Do you agree on theses server rules? (type y to agree):\e[0m"
-    read -p "$(echo -e '\e[33mYour choice:\e[0m') " accept_rules
+    
+    read -p "$(echo -e '\e[36m\e[1mDo you agree to these rules? \e[33m(y/n):\e[0m ') " accept_rules
     accept_rules=$(echo "$accept_rules" | tr '[:upper:]' '[:lower:]') # Convert to lowercase
+    
     if [[ "$accept_rules" == *y* || "$accept_rules" == *yes* ]]; then
         mkdir -p "system"
         touch "$accept_rules_file"
-        printout success "Rules has been accepted. Starting installation..."
+        echo -e "\e[1;36m \e[0m"
+        printout success "Rules accepted! Starting installation..."
         echo -e "\e[1;36m \e[0m"
     else
-        printout error "You must accept to our rules to use this server! Exiting..."
+        echo -e "\e[1;36m \e[0m"
+        printout error "You must accept the rules to use this server! Exiting..."
         exit 1
     fi
 }
