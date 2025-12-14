@@ -28,9 +28,9 @@ aether is free and open-source software. To host this egg, a lot of resources an
 4. ???
 5. profit
 
-## 🖥️ Hosting's that use aether
+## 🖥️ Hostings that use aether
 
-| Hosting's                                    | About                                                                                                                                        | Custom banner? | Notes    |
+| Hostings                                    | About                                                                                                                                        | Custom banner? | Notes    |
 |---------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|-----|---------------------|
 | [**OrynCloud**](https://www.oryncloud.com/) | Host your perfect game server with lightning-fast speeds, 99.9% uptime, and DDoS protection. The premier choice for serious gamers in India. | ✅ | Used in free hosting
 
@@ -56,9 +56,9 @@ right now, this is what i'm planning to do:
 
 - [ ] 💾 decrease docker image size (current is ~250mb)
 - [ ] 🤖 maybe setup bot languages? might take a lot of space tho
-- [x] ❓ organize the functions of the egg, current egg is kinda hard to understand in my opinion
-- [ ] ⌨️ don't make the startup tab filled with admin only variables, maybe like a .json file that people can host themselves?
-- [ ] 🔒 lock server softwares that hosting's may not need
+- [x] ❓ organize the functions of the egg, current egg is somewhat difficult to understand in my opinion
+- [ ] ⌨️ don't make the startup tab filled with admin only variables, perhaps like a .json file that people can host themselves?
+- [ ] 🔒 lock server softwares that hostings may not need
 - [ ] ➕ enable ability to change rules
 
 ## 💖 Credits
