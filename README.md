@@ -1,6 +1,3 @@
-> [!WARNING]  
-> i currently have found no bugs and is pretty much stable software, so this project will go on maintenance mode, maybe a rewrite would happen soon? i don't know... if any bugs occur, please report it via [`➚ GitHub Issues`](https://github.com/lonersoft/aether/issues/new), thanks! :3
-
 # 🥚 aether [![wakatime](https://wakatime.com/badge/github/lonersoft/aether.svg)](https://wakatime.com/badge/github/lonersoft/aether) [![Create and publish the egg on ghcr.io](https://github.com/lonersoft/aether/actions/workflows/docker-publish.yml/badge.svg?branch=main)](https://github.com/lonersoft/aether/actions/workflows/docker-publish.yml)
 
 A simple multiegg that's highly configurable (in my opinion), ~~that's paid~~ all for free and open source!
@@ -17,7 +14,7 @@ there's not alot of impressive features, but some of them might be useful such a
 any ideas you may wanna see? [`➚ create an issue!`](https://github.com/lonersoft/aether/issues/new)
 
 ## 💖 Donate
-aether is free and open-source software. To host this egg, alot of resources and money (and most importantly, time!) is used to run the servers. To keep our motivation going and keep everything up and running, we rely heavily on [`➚ donations`](https://hcb.hackclub.com/lonersoft/donations). We're also nonprofit and transparent with our finances! 
+aether is free and open-source software. To host this egg, a lot of resources and money (and most importantly, time!) is used to run the servers. To keep our motivation going and keep everything up and running, we rely heavily on [`➚ donations`](https://hcb.hackclub.com/lonersoft/donations). We're also nonprofit and transparent with our finances! 
 
 [➚ **Donate to our nonprofit organization**](https://hcb.hackclub.com/donations/start/lonersoft) or [`➚ view our open finances`](https://hcb.hackclub.com/lonersoft).
 
@@ -30,7 +27,8 @@ aether is free and open-source software. To host this egg, alot of resources and
 5. profit
 
 ## 🖥️ Hostings that use aether
-| Hostings                                    | About                                                                                                                                        | Custom banner? | Notes    |
+
+| Hostings                                     | About                                                                                                                                        | Custom banner? | Notes    |
 |---------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|-----|---------------------|
 | [**OrynCloud**](https://www.oryncloud.com/) | Host your perfect game server with lightning-fast speeds, 99.9% uptime, and DDoS protection. The premier choice for serious gamers in India. | ✅ | Used in free hosting
 
@@ -55,9 +53,9 @@ wanna contribute? thanks! to start contributing, you have to [`➚ fork this rep
 right now, this is what i'm planning to do:
 
 - [ ] 💾 decrease docker image size (current is ~250mb)
-- [ ] 🤖 maybe setup bot languages? might take alot of space tho
+- [ ] 🤖 maybe setup bot languages? might take a lot of space tho
 - [x] ❓ organize the functions of the egg, current egg is kinda hard to understand in my opinion
-- [ ] ⌨️ don't make the startup tab filled with admin only variables, maybe like a .json file that people can host themselves?
+- [ ] ⌨️ don't make the startup tab filled with admin-only variables, perhaps with a .json file that people can host themselves?
 - [ ] 🔒 lock server softwares that hostings may not need
 - [ ] ➕ enable ability to change rules
 

@@ -24,7 +24,7 @@ function bedrock_menu {
             break
             ;;
         *)
-            echo -e "\e[1;31m[ERROR] \e[0;31mInvalid choice. Please try again.\e[0m"
+            printout error "Invalid choice. Please try again."
             ;;
         esac
     done

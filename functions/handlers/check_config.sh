@@ -31,11 +31,7 @@ function check_config {
                 clear
                 display
                 check_aether_updates
-                case "$type" in
-                mc_java | mc_java_paper | mc_java_purpur | mc_java_pufferfish)
-                    launchJavaServer
-                    ;;
-                esac
+                launchJavaServer
                 exit
                 ;;
             pmmp)
@@ -49,8 +45,8 @@ function check_config {
                 clear
                 display
                 check_aether_updates
-                echo -e "\e[1;31m[ERROR] \e[0;31mInvalid system configuration type specified in system/multiegg.yml.\e[0m"
-                echo -e "\e[1;31m[ERROR] \e[0;31mPlease delete the system/multiegg.yml file and restart your server.\e[0m"
+                printout error "Invalid system configuration type specified in system/multiegg.yml."
+                printout error "Please delete the system/multiegg.yml file and restart your server."
                 exit 1
                 ;;
             esac
@@ -58,8 +54,8 @@ function check_config {
         clear
         display
         check_aether_updates
-        echo -e "\e[1;31m[ERROR] \e[0;31mInvalid system configuration file.\e[0m"
-        echo -e "\e[1;31m[ERROR] \e[0;31mPlease delete the system/multiegg.yml file and restart your server.\e[0m"
+        printout error "Invalid system configuration file."
+        printout error "Please delete the system/multiegg.yml file and restart your server."
         exit 1
     fi
 }

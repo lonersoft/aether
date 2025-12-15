@@ -16,7 +16,7 @@ function proxy_menu {
         1)
             echo -e "\e[1;36m \e[0m"
             echo -e "\e[1;36m \e[0m"
-            echo -e '\e[38;2;255;165;0m[WARNING] \e[38;5;250mBungeeCord versions below 1.16 are not shown here due to them being old.\e[0m'
+            printout warning "BungeeCord versions below 1.16 are not shown here due to them being old."
             echo -e "\e[36m🔧  Select the Bungeecord version you want to use:\e[0m"
             echo -e "\e[32m→ 1.16, 1.17, 1.18, 1.19, 1.20, 1.21\e[0m"
             read -p "$(echo -e '\e[33mYour choice:\e[0m') " input_version
@@ -28,7 +28,7 @@ function proxy_menu {
                 prompt_eula_mc
                 install_bungeecord
             else
-               echo -e "\e[1;31m[ERROR] \e[0;31mThe specified version is either invalid or deprecated.\e[0m"
+               printout error "The specified version is either invalid or deprecated."
             fi
             ;;
         2)
@@ -45,13 +45,13 @@ function proxy_menu {
                 prompt_eula_mc
                 install_velocity
             else
-               echo -e "\e[1;31m[ERROR] \e[0;31mThe specified version is either invalid or deprecated.\e[0m"
+               printout error "The specified version is either invalid or deprecated."
             fi
             ;;
         3)
             echo -e "\e[1;36m \e[0m"
             echo -e "\e[1;36m \e[0m"
-            echo -e '\e[38;2;255;165;0m[WARNING] \e[38;5;250mKeep in mind, Waterfall is deprecated and may not work as expected. Take backups!\e[0m'
+            printout warning "Keep in mind, Waterfall is deprecated and may not work as expected. Take backups!"
             echo -e "\e[36m🔧  Select the Waterfall version you want to use:\e[0m"
             echo -e "\e[32m→ 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21\e[0m"
             read -p "$(echo -e '\e[33mYour choice:\e[0m') " input_version
@@ -63,14 +63,14 @@ function proxy_menu {
                 prompt_eula_mc
                 install_waterfall
             else
-               echo -e "\e[1;31m[ERROR] \e[0;31mThe specified version is either invalid or deprecated.\e[0m"
+               printout error "The specified version is either invalid or deprecated."
             fi
             ;;
         4)
             break
             ;;
         *)
-            echo -e "\e[1;31m[ERROR] \e[0;31mInvalid choice. Please try again.\e[0m"
+            printout error "Invalid choice. Please try again."
             ;;
         esac
     done

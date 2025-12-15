@@ -28,7 +28,7 @@ function minecraft_menu {
                 prompt_eula_mc
                 install_vanilla
             else
-               echo -e "\e[1;31m[ERROR] \e[0;31mThe specified version is either invalid or deprecated.\e[0m"
+               printout error "The specified version is either invalid or deprecated."
             fi
             ;;
         2)
@@ -45,7 +45,7 @@ function minecraft_menu {
                 prompt_eula_mc
                 install_paper
             else
-               echo -e "\e[1;31m[ERROR] \e[0;31mThe specified version is either invalid or deprecated.\e[0m"
+               printout error "The specified version is either invalid or deprecated."
             fi
             ;;
         3)
@@ -60,7 +60,7 @@ function minecraft_menu {
                 prompt_eula_mc
                 install_purpur
             else
-                echo -e "\e[1;31m[ERROR] \e[0;31mThe specified version is either invalid or deprecated.\e[0m"
+                printout error "The specified version is either invalid or deprecated."
             fi
             ;;
         4)
@@ -75,14 +75,14 @@ function minecraft_menu {
                 prompt_eula_mc
                 install_pufferfish
             else
-                echo -e "\e[1;31m[ERROR] \e[0;31mThe specified version is either invalid or deprecated.\e[0m"
+                printout error "The specified version is either invalid or deprecated."
             fi
             ;;
         5)
             break
             ;;
         *)
-            echo -e "\e[1;31m[ERROR] \e[0;31mInvalid choice. Please try again.\e[0m"
+            printout error "Invalid choice. Please try again."
             ;;
         esac
     done
