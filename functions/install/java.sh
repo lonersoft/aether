@@ -58,7 +58,7 @@ function install_java {
     else
         printout info "Installing Java $JAVA_VERSION_S..."
         if [ -n "$(sdk current java)" ]; then
-            OLD_VERSION=$(sdk current java)
+            OLD_VERSION=$(sdk current java | awk '{print $4}')
             printout info "Removing old Java version $OLD_VERSION..."
             sdk uninstall java "$OLD_VERSION"
         fi
