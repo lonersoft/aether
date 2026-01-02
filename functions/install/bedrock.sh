@@ -4,8 +4,9 @@ function install_bedrock {
     printout info "Starting installation of Vanilla Bedrock Server..."
     # Minecraft CDN Akamai blocks script user-agents
     RANDVERSION=$(echo $((1 + $RANDOM % 4000)))
-    if [ -z "${BEDROCK_VERSION}" ] || [ "${BEDROCK_VERSION}" == "latest" ]; then
-        printout info "Downloading latest Bedrock Server"
+    
+    # Determine download URL based on version
+    if [ "${BEDROCK_VERSION}" == "latest" ]; then
         DOWNLOAD_URL="https://mcjarfiles.com/api/get-latest-jar/bedrock/latest/linux"
     else
         printout info "Grabbing URL of ${BEDROCK_VERSION} Bedrock Server"

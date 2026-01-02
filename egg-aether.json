@@ -79,16 +79,6 @@
             "field_type": "text"
         },
         {
-            "name": "Vanilla Bedrock Dedicated Server Version",
-            "description": "If you are using Vanilla Bedrock, set the version of the server here. You can grab it here: https:\/\/www.minecraft.net\/en-us\/download\/server\/bedrock. For example, if the server link is https:\/\/www.minecraft.net\/bedrockdedicatedserver\/bin-linux\/bedrock-server-1.21.114.1.zip, you would put in this variable: 1.21.114.1",
-            "env_variable": "BEDROCK_VERSION",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string",
-            "field_type": "text"
-        },
-        {
             "name": "Discord URL (ADMIN ONLY)",
             "description": "Your Discord Server Invite Code. Does not change the MOTD URL. If for example your Discord Server is located at discord.gg\/valorant, put \"valorant\" here.",
             "env_variable": "DISCORD_LINK",
@@ -162,7 +152,7 @@
             "name": "Aether Version",
             "description": "DO NOT MODIFY THIS VARIABLE! This is used for Aether's update checker, and allows you to get new features, bug fixes, etc.",
             "env_variable": "AETHER_VERSION",
-            "default_value": "1.1.0",
+            "default_value": "2.0.1",
             "user_viewable": true,
             "user_editable": false,
             "rules": "required|string",
