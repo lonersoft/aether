@@ -2,13 +2,13 @@ name: Bug Report
 description: Report an issue to help us improve
 title: "[BUG] Brief description"
 labels: ["bug"]
-assignees: 'amogusreal69'
+assignees: 'heyitslumi'
 body:
   - type: markdown
     attributes:
       value: |
         ## Thank you for reporting!
-        Please be as detailed as possible. For urgent issues, please contact me at Discord: @amogusreal69420.
+        Please be as detailed as possible. For urgent issues, please contact me at Discord: @dev.sus.
         
   - type: input
     id: bug-title

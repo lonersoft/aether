@@ -1,7 +1,7 @@
 name: ➕ Server Software Request
 description: Request a server software to be added to aether.
 title: "[REQUEST] Server Software Name"
-assignees: 'amogusreal69'
+assignees: 'heyitslumi'
 labels: ["request"]
 body:
   - type: markdown
