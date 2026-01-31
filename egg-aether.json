@@ -147,26 +147,6 @@
             "user_editable": false,
             "rules": "nullable|string|size:64",
             "field_type": "text"
-        },
-        {
-            "name": "Aether Version",
-            "description": "DO NOT MODIFY THIS VARIABLE! This is used for Aether's update checker, and allows you to get new features, bug fixes, etc.",
-            "env_variable": "AETHER_VERSION",
-            "default_value": "2.1.0",
-            "user_viewable": true,
-            "user_editable": false,
-            "rules": "required|string",
-            "field_type": "text"
-        },
-        {
-            "name": "Disable aether update checker",
-            "description": "NOT RECOMMENDED! See \"Aether Version\" in variables for more information.",
-            "env_variable": "DISABLE_UPDATES",
-            "default_value": "0",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "required|boolean",
-            "field_type": "text"
         }
     ]
 }

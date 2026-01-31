@@ -22,7 +22,6 @@ function main {
     while true; do
         clear
         display
-        check_aether_updates
         mkdir -p system
         if [[ "$ENABLE_RULES" == "1" ]]; then
             rules

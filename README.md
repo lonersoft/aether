@@ -1,3 +1,7 @@
+> [!WARNING]
+> aether is currently no longer being maintained while I focus on more important stuff. I've really enjoyed making this egg, but I just can't keep up with demands from school, hostings, etc.
+> It's been a fun ride.
+
 # 🥚 aether [![wakatime](https://wakatime.com/badge/github/lonersoft/aether.svg)](https://wakatime.com/badge/github/lonersoft/aether) [![Create and publish the egg on ghcr.io](https://github.com/lonersoft/aether/actions/workflows/docker-publish.yml/badge.svg?branch=main)](https://github.com/lonersoft/aether/actions/workflows/docker-publish.yml)
 
 A simple multiegg that's highly configurable (in my opinion), ~~that's paid~~ all for free and open source!

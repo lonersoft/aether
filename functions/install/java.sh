@@ -47,7 +47,6 @@ function install_java {
     if [ -z "$JAVA_VERSION_S" ]; then
         clear
         display
-        check_aether_updates
         printout error "Oops! You met an error that occurred while installing Java $JAVA_VERSION."
         printout error "Please report this issue to the support team and share this error message:"
         printout error "The JAVA_VERSION_S variable is empty, which cannot continue the Java Installation section."
