@@ -1,37 +1,32 @@
-FROM debian:bookworm-slim
+FROM ubuntu:latest
 
-# Set environment variables
+# Set environment variables for user and home directory
 ENV USER=container
 ENV HOME=/home/container
-ENV DEBIAN_FRONTEND=noninteractive
 
-# Create user and set working directory
-RUN adduser --disabled-password --home /home/container container
-
+# Set the working directory
 WORKDIR /home/container
 
-# Install packages (Combined and cleaned up to save space)
-RUN apt update && \
+# Copy the entrypoint script to the container
+COPY ./entrypoint.sh /entrypoint.sh
+COPY ./functions /functions
+
+# Update and install required packages
+RUN apt update -y && \
     apt upgrade -y && \
-    apt install -y --no-install-recommends \
+    apt install -y \
         curl \
         zip \
         unzip \
         jq \
         coreutils \
         toilet \
-        ca-certificates && \ 
+        software-properties-common && \
     apt clean && \
-    rm -rf /var/lib/apt/lists/*
+    adduser --disabled-password --home /home/container container
 
-# Copy scripts with correct permissions for the 'container' user
-COPY --chown=container:container ./entrypoint.sh /entrypoint.sh
-COPY --chown=container:container ./functions /functions
-
-# Ensure entrypoint is executable
-RUN chmod +x /entrypoint.sh
-
+# Switch to non-root user
 USER container
-ENV  USER=container HOME=/home/container
 
+# Set the entrypoint
 CMD ["/bin/bash", "/entrypoint.sh"]
