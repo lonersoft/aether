@@ -1,6 +1,7 @@
 > [!WARNING]
-> aether is currently no longer being maintained while I focus on more important stuff. I've really enjoyed making this egg, but I just can't keep up with demands from school, hostings, etc.
-> It's been a fun ride.
+> aether is going through a pretty good rewrite of almost everything, this also includes the admin only variables to be replaced by a file hosted on your servers as the variables instead. thanks for using aether <3
+> 
+> ps. the rewrite is happening on a private repo, so you won't have access to it
 
 # 🥚 aether [![wakatime](https://wakatime.com/badge/github/lonersoft/aether.svg)](https://wakatime.com/badge/github/lonersoft/aether) [![Create and publish the egg on ghcr.io](https://github.com/lonersoft/aether/actions/workflows/docker-publish.yml/badge.svg?branch=main)](https://github.com/lonersoft/aether/actions/workflows/docker-publish.yml)
 
