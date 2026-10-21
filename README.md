@@ -3,7 +3,7 @@
 > 
 > ps. the rewrite is happening on a private repo, so you won't have access to it
 
-# 🥚 aether [![wakatime](https://wakatime.com/badge/github/lonersoft/aether.svg)](https://wakatime.com/badge/github/lonersoft/aether) [![Create and publish the egg on ghcr.io](https://github.com/lonersoft/aether/actions/workflows/docker-publish.yml/badge.svg?branch=main)](https://github.com/lonersoft/aether/actions/workflows/docker-publish.yml)
+# 🥚 aether [![Create and publish the egg on ghcr.io](https://github.com/lonersoft/aether/actions/workflows/docker-publish.yml/badge.svg?branch=main)](https://github.com/lonersoft/aether/actions/workflows/docker-publish.yml)
 
 A simple multiegg that's highly configurable (in my opinion), ~~that's paid~~ all for free and open source!
 
