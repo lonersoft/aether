@@ -9,11 +9,7 @@ function display {
     echo -e "\e[38;2;195;144;230m  Server Port: \e[38;5;250m$SERVER_PORT\e[0m"
     echo -e "\e[1;36m \e[0m"
     echo -e "\e[1;36m \e[0m"
-    if [ "$HOSTING_NAME" == "OrynCloud" ]; then
-        toilet -f "smblock" "OrynCloud" -w 200 | sed "s/^/\x1b[38;5;93m/" | sed "s/$/\x1b[0m/"
-    else
-        toilet -f "smblock" --filter gay "$HOSTING_NAME" -w 200
-    fi
+    toilet -f "smblock" --filter gay "$HOSTING_NAME" -w 200
     echo -e "\e[1;36m \e[0m"
     printout info "wanna suggest a new server software? create an issue here:"
     printout info "https://link.loners.software/aether/software"

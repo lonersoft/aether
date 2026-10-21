@@ -2,6 +2,9 @@
 
 function prompt_eula_mc {
     local eula_file="eula.txt"
+    if [ -f "$eula_file" ] && grep -q "eula=true" "$eula_file" 2>/dev/null; then
+        return 0
+    fi
     
     echo -e "\e[1;36m \e[0m"
     echo -e "\e[38;2;195;144;230m\e[1m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[0m"
