@@ -33,11 +33,9 @@ aether is free and open-source software. To host this egg, a lot of resources an
 
 ## 🖥️ Hostings that use aether
 
-| Hostings                                     | About                                                                                                                                        | Custom banner? | Notes    |
-|---------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|-----|---------------------|
-| [**OrynCloud**](https://www.oryncloud.com/) | Host your perfect game server with lightning-fast speeds, 99.9% uptime, and DDoS protection. The premier choice for serious gamers in India. | ✅ | Used in free hosting
+currently there's none! 
 
-want your hosting listed here and/or have a custom banner? [📧 email me!](mailto:lumi@votion.dev) it's free!
+want your hosting listed here and/or have a custom banner? [📧 email me!](mailto:hi@lumis.moe) it's free!
 
 ## 👥 Contributors
 wanna contribute? thanks! to start contributing, you have to [`➚ fork this repo`](https://github.com/lonersoft/aether/fork) and then [`➚ open a PR`](https://github.com/lonersoft/aether/compare).
